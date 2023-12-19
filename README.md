@@ -2,7 +2,12 @@
 
 ## Project setup
 ```
-npm install
+npm install vue-router
+```
+
+## For communicating with the backend
+```
+npm install axios
 ```
 
 ### Compiles and hot-reloads for development
