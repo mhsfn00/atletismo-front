@@ -1,28 +1,18 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+// import { ref, onMounted } from 'vue';
+// import axios from 'axios';
+import { storeToRefs } from 'pinia';
+import { usePostsStore } from '../stores/PostsStore.js'
 
-const posts = ref([]);
+const { posts } = storeToRefs(usePostsStore());
+const { getPosts } = usePostsStore();
 
-onMounted(() => {
-    getPosts();
-});
-
-async function getPosts() {
-    try {
-        const url = '/api/posts';
-        const response = await axios.get(url);
-        posts.value = response.data;
-    } catch (err) {
-        console.log(err.response);
-    }
-}
+getPosts();
 </script>
 
 <template>
     <div class="container-page">
         <div class="post-card" v-for="post in posts" :key="post.id">
-            <!-- Using query as if it were props -->
             <router-link class="link-nostyling" :to="{path:`post/${post.id}`, query: post }">
                 <div class="image-container">
                     <img class="post-image" :src="post.image" />

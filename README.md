@@ -9,6 +9,10 @@ npm install vue-router
 ```
 npm install axios
 ```
+## State management with Pinia 
+```
+npm install pinia
+```
 
 ### Compiles and hot-reloads for development
 ```
