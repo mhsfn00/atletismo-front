@@ -22,7 +22,8 @@ async function getPosts() {
 <template>
     <div class="container-page">
         <div class="post-card" v-for="post in posts" :key="post.id">
-            <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
+            <!-- Using query as if it were props -->
+            <router-link class="link-nostyling" :to="{path:`post/${post.id}`, query: post }">
                 <div class="image-container">
                     <img class="post-image" :src="post.image" />
                 </div>
@@ -46,7 +47,7 @@ async function getPosts() {
     }
 
     .container-page {
-        margin: 0 6vw;
+        margin: 0 16vw;
         align-items: center;
 
         display: flex;

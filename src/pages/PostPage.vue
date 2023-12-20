@@ -1,8 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router';
-import { posts } from '../temp-data.js'; // Temporary static data for testing
-
-const currentPost = posts.find(post => post.id === useRoute().params.postId);
+const currentPost = useRoute().query; // Using query as if it were props
 </script>
 
 <template>
