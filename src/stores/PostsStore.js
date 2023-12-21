@@ -4,6 +4,7 @@ import axios from 'axios';
 export const usePostsStore = defineStore("PostsStore", {
     state: () => ({
         posts: [],
+        currentPost: {},
     }),
 
     actions: {
@@ -18,12 +19,24 @@ export const usePostsStore = defineStore("PostsStore", {
             }
         },
         
+        getPostWithId (postId) {
+            const postIdString = postId.toString();
+            this.posts.forEach(post => {
+                const { id } = post;
+                console.log(id);
+                console.log(postIdString);
+                if (postIdString === id){
+                    console.log("found", post);
+                    this.currentPost = post;
+                    console.log(this.currentPost);
+                }
+            });
+        }
     },
 
     getters: {
         // To be implemented, 
         // Button to load more posts
-        // Logic to get the currentPost for PostPage (this way there's no need to make a new request)
     }
 });
 

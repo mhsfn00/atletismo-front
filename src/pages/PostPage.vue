@@ -1,11 +1,18 @@
 <script setup>
 import { useRoute } from 'vue-router';
-const currentPost = useRoute().query; // Using query as if it were props
+import { usePostsStore } from '../stores/PostsStore.js';
+
+const currentPostId = useRoute().params.postId; // Using query as if it were props
+const { getPostWithId } = usePostsStore();
+
+const currentPost = getPostWithId(currentPostId); 
+
+console.log(currentPost);
 </script>
 
 <template>
     <div class="page-container">
-        <div class="image-container">
+        <!-- <div class="image-container">
             <img class="image" :src=currentPost.image alt="Post Image" />
         </div>
         <div class="text-container">
@@ -17,7 +24,7 @@ const currentPost = useRoute().query; // Using query as if it were props
                 {{ currentPost }} {{ currentPost }} {{ currentPost }}
                 {{ currentPost }} {{ currentPost }} {{ currentPost }}
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
