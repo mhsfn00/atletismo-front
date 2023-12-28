@@ -1,10 +1,10 @@
 <script setup>
-import PostContainerList from '../components/PostContainerList.vue';
+import PostContainerGrid from '@/components/PostContainerGrid.vue';
 </script>
 
 <template>
     <div>
-        <PostContainerList />
+        <PostContainerGrid />
     </div>  
 </template>
 

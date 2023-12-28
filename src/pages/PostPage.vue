@@ -1,18 +1,21 @@
 <script setup>
-import { useRoute } from 'vue-router';
-import { usePostsStore } from '../stores/PostsStore.js';
+import { useRoute } from 'vue-router'; // Importing useRoute to get the post id from the current route
+import { usePostsStore } from '../stores/PostsStore.js'; // Same stuff used on PostContainerGrid to get data from PostsStore
+import { storeToRefs } from 'pinia';
 
-const currentPostId = useRoute().params.postId; // Using query as if it were props
+const currentPostId = useRoute().params.postId;
 const { getPostWithId } = usePostsStore();
+const { currentPost } = storeToRefs(usePostsStore());
 
-const currentPost = getPostWithId(currentPostId); 
-
-console.log(currentPost);
+getPostWithId(currentPostId); // This action makes a request to the backend to get one specific post
+// Decided to make a request to the server here aswell for the cases in which the user will access
+// a post link directly, without running through the home page first. Also even the home page probably wont
+// load ALL posts by default.
 </script>
 
 <template>
     <div class="page-container">
-        <!-- <div class="image-container">
+        <div class="image-container">
             <img class="image" :src=currentPost.image alt="Post Image" />
         </div>
         <div class="text-container">
@@ -24,17 +27,13 @@ console.log(currentPost);
                 {{ currentPost }} {{ currentPost }} {{ currentPost }}
                 {{ currentPost }} {{ currentPost }} {{ currentPost }}
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
 <style scoped>
     .text-container {
         margin-left: 1vw;
-    }
-
-    .page-container {
-        margin: 0 6vw;
     }
 
     .image {

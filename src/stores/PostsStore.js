@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+// import { isProxy, toRaw } from 'vue';
 
 export const usePostsStore = defineStore("PostsStore", {
     state: () => ({
@@ -12,26 +13,21 @@ export const usePostsStore = defineStore("PostsStore", {
             try {
                 const url = '/api/posts';
                 const response = await axios.get(url);
-                console.log(response.data);
                 this.posts = response.data;
             } catch (err) {
                 console.log(err.response);
             }
         },
         
-        getPostWithId (postId) {
-            const postIdString = postId.toString();
-            this.posts.forEach(post => {
-                const { id } = post;
-                console.log(id);
-                console.log(postIdString);
-                if (postIdString === id){
-                    console.log("found", post);
-                    this.currentPost = post;
-                    console.log(this.currentPost);
-                }
-            });
-        }
+        async getPostWithId (postId) {
+            try { 
+                const url = `api/post/${postId}`;
+                const response = await axios.get(url);
+                this.currentPost = response.data;
+            } catch (err) {
+                console.log(err.response);
+            }
+        },
     },
 
     getters: {

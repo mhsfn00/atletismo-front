@@ -1,6 +1,4 @@
 <script setup>
-// import { ref, onMounted } from 'vue';
-// import axios from 'axios';
 import { storeToRefs } from 'pinia';
 import { usePostsStore } from '../stores/PostsStore.js'
 
@@ -13,7 +11,7 @@ getPosts();
 <template>
     <div class="container-page">
         <div class="post-card" v-for="post in posts" :key="post.id">
-            <router-link class="link-nostyling" :to="{path:`post/${post.id}`, query: post }">
+            <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
                 <div class="image-container">
                     <img class="post-image" :src="post.image" />
                 </div>

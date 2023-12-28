@@ -19,3 +19,7 @@
 .display-none {
     display: none;
 }
+
+.page-container {
+    margin: 0 6vw;
+}
