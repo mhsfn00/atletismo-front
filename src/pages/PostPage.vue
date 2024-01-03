@@ -7,7 +7,8 @@ const currentPostId = useRoute().params.postId;
 const { getPostWithId } = usePostsStore();
 const { currentPost } = storeToRefs(usePostsStore());
 
-getPostWithId(currentPostId); // This action makes a request to the backend to get one specific post
+getPostWithId(currentPostId);
+ // This action makes a request to the backend to get one specific post
 // Decided to make a request to the server here aswell for the cases in which the user will access
 // a post link directly, without running through the home page first. Also even the home page probably wont
 // load ALL posts by default.

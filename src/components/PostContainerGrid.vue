@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'; // Importing stuff to use PostsStore
 import { usePostsStore } from '../stores/PostsStore.js'
 
-const { posts } = storeToRefs(usePostsStore()); // Getting the posts variable from PostStore
+const { mainPost, secondaryPosts, extraPosts } = storeToRefs(usePostsStore()); // Getting the posts variable from PostStore
 const { getPosts } = usePostsStore(); // Getting the getPosts action from PostStore
 
 getPosts(); // Using getPosts to make the request to the backend and store posts in PostsStore
@@ -10,110 +10,84 @@ getPosts(); // Using getPosts to make the request to the backend and store posts
 
 <template>
     <div class="page-container">
-        <router-link v-for="post in posts" :key="post.id" :to="{ path:`post/${post.id}`}">
-            <div class="post-container">
-                <img class="post-image" :src="post.image" />
+        <div class="posts-container">
+            <div class="main-posts-container">
+                <div class="main-post-card">
+                    <router-link class="link-nostyling" :to="{path:`post/${mainPost.id}`}">
+                        <img class="main-post-image" :src="mainPost.image" />
+                    </router-link>
+                </div>
+                <div class="secondary-posts-container">
+                    <div class="secondary-post-card" v-for="post in secondaryPosts" :key="post.id">
+                        <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
+                            <img class="post-image" :src="post.image" />
+                        </router-link>
+                    </div>
+                </div>
             </div>
-        </router-link>
-    </div>  
+            <div class="extra-posts-container">
+                <div class="post-card" v-for="post in extraPosts" :key="post.id">
+                    <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
+                        <img class="post-image" :src="post.image" />
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </div>    
 </template>
 
 <style scoped>
-    .post-container {
-        background-color: lightgray;
-    }
-
-    .page-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .post-image {
-        width: 20vw;
-        height: 20vh;
-    }
-</style>
-
-<!-- .main-post-image {
-    width: 260px;
-    height: 300px;
+.main-post-image {
+    height: 52vh;
 }
 
-.post-container {
-    display: grid;
-    padding: 0 10vw;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+.post-image {
+    height: 26vh; /* half of main image */
 }
 
-.main {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 3;
+.post-card {
+    background-color: lightgray;
+    width: 33%;
 }
 
-.post {
+.secondary-post-card {
+    background-color: lightgray;
     width: 100%;
-    height: 100%;
+}
+
+.main-post-card {
+    background-color: lightblue;
+    width: 67%;
+}
+
+.main-posts-container {
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1%;
+}
+
+.secondary-posts-container {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    gap: 15px;
+}
+
+.extra-posts-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1%;
+}
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: var(--verde-main); */
-    border: 1px solid black;
-    border-radius: 6px;
+    width: 100%;
+    height: 75%;
+    gap: 15px;
 }
-
-.secondary {
-    width: 28vw;
-    height: 12vw;
-}
-
-.secondary-image {
-    width: 130px;
-    height: 150px;
-}
-
-.one {
-    display: flex;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-
-.two {
-    display: flex;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
-}
-
-.three {
-    display: flex;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 3;
-    grid-row-end: 4;
-}
-
-.four {
-    display: flex;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 4;
-}
-
-.five {
-    display: flex;
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 3;
-    grid-row-end: 4;
-} -->
+</style>
