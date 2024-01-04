@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router'; // Importing useRoute to get the post id from the current route
 import { usePostsStore } from '../stores/PostsStore.js'; // Same stuff used on PostContainerGrid to get data from PostsStore
 import { storeToRefs } from 'pinia';
+import { defineProps } from 'vue';
 
 const currentPostId = useRoute().params.postId;
 const { getPostWithId } = usePostsStore();
@@ -12,6 +13,10 @@ getPostWithId(currentPostId);
 // Decided to make a request to the server here aswell for the cases in which the user will access
 // a post link directly, without running through the home page first. Also even the home page probably wont
 // load ALL posts by default.
+
+const props = defineProps({
+    loggedUser: {}
+});
 </script>
 
 <template>
@@ -29,10 +34,22 @@ getPostWithId(currentPostId);
                 {{ currentPost }} {{ currentPost }} {{ currentPost }}
             </div>
         </div>
+        <button v-if="props.loggedUser" class="edit-button">Editar</button>
     </div>
 </template>
 
 <style scoped>
+    .edit-button {
+        position: fixed;
+        top: 15%;
+        right: 10%;
+        width: 5vw;
+        height: 5vh;
+        cursor: pointer;
+        background-color: lightblue;
+        border-radius: 6px;
+    }
+
     .text-container {
         margin-left: 1vw;
     }

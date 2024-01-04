@@ -1,7 +1,59 @@
 <script setup>
-// This file works as a main file, with the nav bar and the routing.
+// This file works as a main file, with the nav bar and the routing;
 // From here each imported component is a page;
 // Simple routing copied from the vue docs;
+import { ref } from 'vue';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+const loginPopup = ref(false); 
+const logoutPopup = ref(false);
+const loggedUser = ref(null);
+
+function showHideLoginPopup() {
+    loginPopup.value = !loginPopup.value;
+}
+
+function showHideLogoutPopup() {
+    logoutPopup.value = !logoutPopup.value;
+}
+
+async function loginEmailPassword() { // Login using email and password (account was created in the firebase console, might keep it that way)
+    const auth = getAuth();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            loggedUser.value = user;
+            alert("Login Succesfull"); 
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            alert("Login Failed");
+        });
+    
+    showHideLoginPopup();
+}
+
+async function logout() {
+    const auth = getAuth();
+    auth.signOut()
+        .then(function() {
+            loggedUser.value = null;
+            alert("Sign out successful");
+        })
+        .catch(function(error) {
+            alert("Something went wrong when signing out");
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+        });
+    
+    showHideLogoutPopup();
+}
 </script>
 
 <template>
@@ -32,22 +84,51 @@
                     </div>
                 </router-link>
             </div>
-            <a href='/' class="link-nostyling">
-                <div class="navbar-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
-                        <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5
-                        12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7
-                        40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144
-                        144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
-                    </svg>
-                </div>
-            </a>
+            <div v-if="!loggedUser" class="login-button" @click="showHideLoginPopup">
+                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 
+                    482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 
+                    304 269.7 304H178.3z"/>
+                </svg>
+            </div>
+            <div v-else class="logout-button" @click="showHideLogoutPopup">
+                M
+            </div>
         </ul>
-        <router-view></router-view>
+        <div v-if="loginPopup" class="login-popup" id="loginPopup">
+            Email <input id="email" value="mhsfn00@gmail.com" /> <!-- value set so i dont need to type the email every time -->
+            Senha <input id="password" type="password" />
+            <button @click="loginEmailPassword">Entrar</button>
+        </div>
+        <div v-if="logoutPopup" class="logout-popup" id="logoutPopup">
+            <button @click="logout">Sair</button>
+        </div>
+        <router-view :loggedUser="loggedUser"></router-view>
     </div>
 </template>
 
 <style scoped>
+.login-popup, .logout-popup {
+    background-color:aquamarine;
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    padding: 5px;
+    gap: 3px;
+}
+
+.login-button, .logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    width: 80px;
+    cursor: pointer;
+}
+
 .navbar-container-buttons {
     display: flex;
     align-items: center;
@@ -62,7 +143,7 @@
     font-size: 18px;
 }
 
-.navbar-button:hover {
+.navbar-button:hover, .login-button:hover, .logout-button:hover {
     background-color: var(--verde-hover);
 }
 
