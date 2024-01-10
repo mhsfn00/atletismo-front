@@ -23,3 +23,15 @@
 .page-container {
     margin: 0 12vw;
 }
+
+.action {
+    background-color: #00f7ff;    
+}
+
+.confirm {
+    background-color: #00ff4c;
+}
+
+.cancel {
+    background-color: #ff0000;
+}

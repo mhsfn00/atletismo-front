@@ -3,11 +3,12 @@
 // From here each imported component is a page;
 // Simple routing copied from the vue docs;
 import { ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 const loginPopup = ref(false); 
 const logoutPopup = ref(false);
 const loggedUser = ref(null);
+const userIdentityLetter = ref('');
 
 function showHideLoginPopup() {
     loginPopup.value = !loginPopup.value;
@@ -26,6 +27,7 @@ async function loginEmailPassword() { // Login using email and password (account
         .then((userCredential) => {
             const user = userCredential.user;
             loggedUser.value = user;
+            userIdentityLetter.value = user.email.charAt(0).toUpperCase();
             alert("Login Succesfull"); 
         })
         .catch((error) => {
@@ -40,7 +42,7 @@ async function loginEmailPassword() { // Login using email and password (account
 
 async function logout() {
     const auth = getAuth();
-    auth.signOut()
+    signOut(auth)
         .then(function() {
             loggedUser.value = null;
             alert("Sign out successful");
@@ -92,7 +94,7 @@ async function logout() {
                 </svg>
             </div>
             <div v-else class="logout-button" @click="showHideLogoutPopup">
-                M
+                {{ userIdentityLetter }}
             </div>
         </ul>
         <div v-if="loginPopup" class="login-popup" id="loginPopup">

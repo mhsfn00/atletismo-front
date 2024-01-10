@@ -38,6 +38,17 @@ export const usePostsStore = defineStore("PostsStore", {
                 console.log(err.response);
             }
         },
+
+        async editPostWithId (modifiedPost) {
+            try {
+                const url = `api/editPost`;
+                const response = await axios.post(url, modifiedPost);
+
+                return response.data;   
+            } catch (err) {
+                console.log(err.response);
+            }
+        }
     },
 
     getters: {
