@@ -14,13 +14,13 @@ getPosts(); // Using getPosts to make the request to the backend and store posts
             <div class="main-posts-container">
                 <div class="main-post-card">
                     <router-link class="link-nostyling" :to="{path:`post/${mainPost.id}`}">
-                        <img class="main-post-image" :src="mainPost.imageLink" />
+                        <img class="main-post-image" :src="`https://lh3.google.com/u/0/d/${mainPost.imageId}`" />
                     </router-link>
                 </div>
                 <div class="secondary-posts-container">
                     <div class="secondary-post-card" v-for="post in secondaryPosts" :key="post.id">
                         <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
-                            <img class="post-image" :src="post.imageLink" />
+                            <img class="post-image" :src="`https://lh3.google.com/u/0/d/${post.imageId}`" />
                         </router-link>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ getPosts(); // Using getPosts to make the request to the backend and store posts
             <div class="extra-posts-container">
                 <div class="post-card" v-for="post in extraPosts" :key="post.id">
                     <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
-                        <img class="post-image" :src="post.imageLink" />
+                        <img class="post-image" :src="`https://lh3.google.com/u/0/d/${post.imageId}`" />
                     </router-link>
                 </div>
             </div>

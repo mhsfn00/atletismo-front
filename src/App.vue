@@ -62,7 +62,7 @@ async function logout() {
     <div>
         <ul class="navbar">
             <router-link to="/" class="container-home-image link-nostyling">
-                <img class="logo-navbar" src='https://drive.google.com/uc?export=view&id=1etG4XZKAcdPVg7tRjhpPTrRBp4ZYWdmS' alt="logo" />
+                <img class="logo-navbar" src='https://lh3.google.com/u/0/d/1etG4XZKAcdPVg7tRjhpPTrRBp4ZYWdmS' alt="logo" />
             </router-link>
             <div class="navbar-container-buttons">
                 <router-link to="/" class="link-nostyling">
@@ -104,6 +104,7 @@ async function logout() {
         </div>
         <div v-if="logoutPopup" class="logout-popup" id="logoutPopup">
             <button @click="logout">Sair</button>
+            <router-link to="/newPost" @click="showHideLogoutPopup">Criar Post</router-link>
         </div>
         <router-view :loggedUser="loggedUser"></router-view>
     </div>

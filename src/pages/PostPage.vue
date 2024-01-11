@@ -18,7 +18,7 @@ const editAvailable = ref(false);
 const modifiablePost = ref(null); 
 
 const props = defineProps({
-    loggedUser: {}
+    loggedUser: null
 });
 
 
@@ -54,7 +54,7 @@ async function saveEdit() {
 <template>
     <div v-if="!editAvailable" class="page-container">
         <div class="image-container">
-            <img class="image" :src=currentPost.imageLink alt="Post Image" />
+            <img class="image" :src="`https://lh3.google.com/u/0/d/${currentPost.imageId}`" alt="Post Image" />
         </div>
         <div class="text-container">
             <div class="header-container">
