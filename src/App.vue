@@ -56,6 +56,10 @@ async function logout() {
     
     showHideLogoutPopup();
 }
+
+function nextField(nextFieldId) {
+    document.getElementById(nextFieldId).focus();
+}
 </script>
 
 <template>
@@ -98,8 +102,8 @@ async function logout() {
             </div>
         </ul>
         <div v-if="loginPopup" class="login-popup" id="loginPopup">
-            Email <input id="email" value="mhsfn00@gmail.com" /> <!-- value set so i dont need to type the email every time -->
-            Senha <input id="password" type="password" />
+            Email <input id="email" value="mhsfn00@gmail.com" @keyup.enter="nextField('password')" /> <!-- value set so i dont need to type the email every time -->
+            Senha <input id="password" type="password" @keyup.enter="loginEmailPassword"/>
             <button @click="loginEmailPassword">Entrar</button>
         </div>
         <div v-if="logoutPopup" class="logout-popup" id="logoutPopup">

@@ -95,15 +95,6 @@ async function saveEdit() {
 </template>
 
 <style scoped>
-    .button {
-        width: 5vw;
-        height: 5vh;
-        cursor: pointer;
-        border-radius: 6px;
-        border: 0;
-        font-weight: 700;
-    }
-
     .buttons-container {
         position: fixed;
         top: 15%;

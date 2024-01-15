@@ -24,6 +24,15 @@
     margin: 0 12vw;
 }
 
+.button {
+    width: 5vw;
+    height: 5vh;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 0;
+    font-weight: 700;
+}
+
 .action {
     background-color: #00f7ff;    
 }
