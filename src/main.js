@@ -3,9 +3,9 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import './assets/css/global.css';
 import router from './routes/index';
-
 import { initializeApp } from "firebase/app";
 
+const app = createApp(App);
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
@@ -18,4 +18,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-createApp(App).use(router).use(createPinia()).mount('#app');
+app.use(router);
+app.use(createPinia());
+
+app.mount('#app');

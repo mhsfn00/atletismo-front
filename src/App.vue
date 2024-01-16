@@ -1,9 +1,8 @@
 <script setup>
-// This file works as a main file, with the nav bar and the routing;
-// From here each imported component is a page;
-// Simple routing copied from the vue docs;
+// This file works as a main file, with the nav bar and the routing
 import { ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { focusOnNextField } from '@/helpers/helpers.js';
 
 const loginPopup = ref(false); 
 const logoutPopup = ref(false);
@@ -18,7 +17,8 @@ function showHideLogoutPopup() {
     logoutPopup.value = !logoutPopup.value;
 }
 
-async function loginEmailPassword() { // Login using email and password (account was created in the firebase console, might keep it that way)
+async function loginEmailPassword() { 
+    // Login using email and password (account was created in the firebase console, might keep it that way)
     const auth = getAuth();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -55,10 +55,6 @@ async function logout() {
         });
     
     showHideLogoutPopup();
-}
-
-function nextField(nextFieldId) {
-    document.getElementById(nextFieldId).focus();
 }
 </script>
 
@@ -102,7 +98,7 @@ function nextField(nextFieldId) {
             </div>
         </ul>
         <div v-if="loginPopup" class="login-popup" id="loginPopup">
-            Email <input id="email" value="mhsfn00@gmail.com" @keyup.enter="nextField('password')" /> <!-- value set so i dont need to type the email every time -->
+            Email <input id="email" value="mhsfn00@gmail.com" @keyup.enter="focusOnNextField('password')" /> <!-- value set so i dont need to type the email every time -->
             Senha <input id="password" type="password" @keyup.enter="loginEmailPassword"/>
             <button @click="loginEmailPassword">Entrar</button>
         </div>
