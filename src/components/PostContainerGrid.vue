@@ -13,22 +13,22 @@ console.log('main ', posts);
 <template>
     <div class="page-container">
         <div class="posts-container">
-            <div class="main">
+            <div class="main post">
                 0
             </div>
-            <div class="one post">
+            <div class="one secondary post">
                 1
             </div>
-            <div class="two post">
+            <div class="two secondary post">
                 2
             </div>
-            <div class="three post">
+            <div class="three secondary post">
                 3
             </div>
-            <div class="four post">
+            <div class="four secondary post">
                 4
             </div>
-            <div class="five post">
+            <div class="five secondary post">
                 5
             </div>
         </div>
@@ -44,15 +44,17 @@ console.log('main ', posts);
 
 <style scoped>
 .main {
-    width: 400px;
-    height: 400px;
-    background: #ccc;
+    width: 410px;
+    height: 410px;
 }
 
 .post {
+    border: 2px solid black;
+}
+
+.secondary {
     width: 200px;
     height: 200px;
-    background: #ccc;
 }
 
 .posts-container {
@@ -60,6 +62,9 @@ console.log('main ', posts);
     grid-template-columns: auto auto auto;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background-color: #ccc;
 }
 
 .main-post-image {
