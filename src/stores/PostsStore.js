@@ -6,8 +6,11 @@ export const usePostsStore = defineStore("PostsStore", {
         // All posts loaded at the home page (starting with six)
         posts: [], 
 
-        // First three posts
-        mainPosts: [],
+        // First post
+        mainPost: [],
+
+        // Secondary posts (posts on the right side of the main post)
+        secondaryPosts: [],
 
         // Three extra (also load more button)
         extraPosts: [],
@@ -22,7 +25,8 @@ export const usePostsStore = defineStore("PostsStore", {
                 const url = '/api/posts';
                 const response = await axios.get(url);
                 this.posts = response.data;
-                this.mainPosts = this.posts.slice(0, 3);
+                this.mainPost = this.posts.slice(0, 1);
+                this.secondaryPosts = this.posts.slice(1, 3);
                 this.extraPosts = this.posts.slice(3, 6);
             } catch (err) {
                 console.log(err.response);
