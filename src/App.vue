@@ -9,6 +9,8 @@ const logoutPopup = ref(false);
 const loggedUser = ref(null);
 const userIdentityLetter = ref('');
 
+const logoId = ref("1etG4XZKAcdPVg7tRjhpPTrRBp4ZYWdmS");
+
 function showHideLoginPopup() {
     loginPopup.value = !loginPopup.value;
 }
@@ -62,7 +64,7 @@ async function logout() {
     <div>
         <ul class="navbar">
             <router-link to="/" class="container-home-image link-nostyling">
-                <img class="logo-navbar" src='https://lh3.google.com/u/0/d/1etG4XZKAcdPVg7tRjhpPTrRBp4ZYWdmS' alt="logo" />
+                <img class="logo-navbar" :src="`https://lh3.google.com/u/0/d/${logoId}`" alt="logo" />
             </router-link>
             <div class="navbar-container-buttons">
                 <router-link to="/" class="link-nostyling">

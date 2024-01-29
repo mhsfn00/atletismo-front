@@ -4,8 +4,14 @@ import axios from 'axios';
 export const usePostsStore = defineStore("PostsStore", {
     state: () => ({
         // All posts loaded at the home page (starting with six)
-        posts: [],  
+        posts: [], 
 
+        // First three posts
+        mainPosts: [],
+
+        // Three extra (also load more button)
+        extraPosts: [],
+        
         // PostPage
         currentPost: {},
     }),
@@ -16,6 +22,8 @@ export const usePostsStore = defineStore("PostsStore", {
                 const url = '/api/posts';
                 const response = await axios.get(url);
                 this.posts = response.data;
+                this.mainPosts = this.posts.slice(0, 3);
+                this.extraPosts = this.posts.slice(3, 6);
             } catch (err) {
                 console.log(err.response);
             }
@@ -44,8 +52,9 @@ export const usePostsStore = defineStore("PostsStore", {
     },
 
     getters: {
-        // To be implemented, 
-        // Button to load more posts
+        getPostsFromStore() {
+            return this.posts;
+        }
     }
 });
 
