@@ -15,22 +15,37 @@ onMounted(async () => {
         <div class="posts-container">
             <div class="main-posts-container">
                 <div class="main-post-card">
-                    <router-link class="link-nostyling" :to="{path:`post/${postsStore.mainPost.id}`}">
-                        <img src="https://i.postimg.cc/3rPNQbXw/Leagueof-Legends-LCK-Spring2024-Team-Player-Roster-Hanwha-Life-Esports2-1024x576.jpg" class="post-image">
+                    <router-link class="link-nostyling image-container" :to="{path:`post/${postsStore.mainPost.id}`}">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Athletics_%2836099368890%29.jpg/1280px-Athletics_%2836099368890%29.jpg" class="post-image" />
+                            <div class="shadow-overlay" />
+                            <div class="overlay-text">
+                                <p class="subject-date">{{ "Track and Field | " + postsStore.mainPost.date }}</p>
+                                <p class="title">{{ postsStore.mainPost.title }}</p>
+                            </div>
                     </router-link>
                 </div>
                 <div class="secondary-posts-container">
                     <div v-for="(post, index) in postsStore.secondaryPosts" :key="index" class="secondary-post-card">
-                        <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
-                            <img src="https://i.postimg.cc/3rPNQbXw/Leagueof-Legends-LCK-Spring2024-Team-Player-Roster-Hanwha-Life-Esports2-1024x576.jpg" class="post-image">
+                        <router-link class="link-nostyling image-container" :to="{path:`post/${post.id}`}">
+                            <img src="//live.staticflickr.com/5021/5618703271_c8231cfe1c_h.jpg" class="post-image" />
+                            <div class="shadow-overlay" />
+                            <div class="overlay-text">
+                                <p class="subject-date">{{ "Track and Field | " + post.date }}</p>
+                                <p class="title">{{ post.title }}</p>
+                            </div>
                         </router-link>
                     </div>
                 </div>
             </div>
             <div class="extra-posts-container">
                 <div v-for="(post, index) in postsStore.extraPosts" :key="index" class="extra-post-card">
-                    <router-link class="link-nostyling" :to="{path:`post/${post.id}`}">
-                        <img src="https://i.postimg.cc/3rPNQbXw/Leagueof-Legends-LCK-Spring2024-Team-Player-Roster-Hanwha-Life-Esports2-1024x576.jpg" class="post-image">
+                    <router-link class="link-nostyling image-container" :to="{path:`post/${post.id}`}">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/For_athletics.jpg/800px-For_athletics.jpg" class="post-image" />
+                        <div class="shadow-overlay" />
+                        <div class="overlay-text">
+                            <p class="subject-date">{{ "Track and Field | " + post.date }}</p>
+                            <p class="title">{{ post.title }}</p>
+                        </div>
                     </router-link>
                 </div>
             </div>
@@ -39,6 +54,38 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.shadow-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    border-radius: 5px;
+}
+
+.subject-date {
+    font-size: 20px;
+}
+
+.title {
+    font-size: 30px;
+}
+
+.overlay-text {
+    position: absolute;
+    left: 16px;
+    bottom: 30px;
+    font-weight: bold;
+}
+
+.image-container {
+    position: relative;
+    color: white;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
 .main-post-card {
     width: 66%;
     border-radius: 5px;
@@ -90,6 +137,8 @@ onMounted(async () => {
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
+    position: relative;
+    z-index: -1;
 }
 
 @media screen and (max-width: 1366px) {
