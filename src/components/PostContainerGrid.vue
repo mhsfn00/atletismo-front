@@ -54,13 +54,19 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.image-container:hover {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
+    height: 100%;
+    border-radius: 3px;
+}
+
 .shadow-overlay {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
     position: absolute;
     width: 100%;
-    height: 50%;
+    height: 40%;
     bottom: 0;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .main-subject-date {
@@ -97,25 +103,24 @@ onMounted(async () => {
 
 .main-post-card {
     width: 66%;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .secondary-post-card {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     height: 29vh;
 }
 
 .extra-post-card {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     height: 100%;
 }
 
 .posts-container {
     display: flex;
     flex-direction: column;
-    /* height: 86vh; */
     margin: 0px 60px;
     gap: 2vh;
 }
@@ -145,7 +150,7 @@ onMounted(async () => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 3px;
     position: relative;
     z-index: -1;
 }
