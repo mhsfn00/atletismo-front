@@ -1,18 +1,14 @@
 <script setup>
-import { useRoute } from 'vue-router'; // Importing useRoute to get the post id from the current route
-import { usePostsStore } from '../stores/PostsStore.js'; // Same stuff used on PostContainerGrid to get data from PostsStore
-import { storeToRefs } from 'pinia';
-import { defineProps, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { usePostsStore } from '../stores/PostsStore.js';
+import { defineProps, ref, onMounted } from 'vue';
 
 const currentPostId = useRoute().params.postId;
-const { getPostWithId, editPostWithId } = usePostsStore();
-const { currentPost } = storeToRefs(usePostsStore());
+const postsStore = usePostsStore();
 
-getPostWithId(currentPostId);
-// This action makes a request to the backend to get one specific post
-// Decided to make a request to the server here aswell for the cases in which the user will access
-// a post link directly, without running through the home page first. Also even the home page probably wont
-// load ALL posts by default.
+onMounted(async () =>  {
+    await postsStore.getPostWithId(currentPostId);
+});
 
 const editAvailable = ref(false);
 const modifiablePost = ref(null); 
@@ -21,9 +17,8 @@ const props = defineProps({
     loggedUser: null
 });
 
-
 function enableEdit() {
-    modifiablePost.value = currentPost.value;
+    modifiablePost.value = postsStore.currentPost;
     editAvailable.value = true;    
 }
 
@@ -33,11 +28,11 @@ function cancelEdit() {
 }
 
 async function saveEdit() {
-    const response = await editPostWithId({
+    const response = await postsStore.editPostWithId({
         id: currentPostId,
-        imageLink: modifiablePost.value.imageLink,
-        title: modifiablePost.value.title,
-        text: 'new text again',
+        imageLink: document.getElementById("newImageLink").value,
+        title: document.getElementById("newTitle").value,
+        text: document.getElementById("newText").value,
     });
 
     if (response.modifiedCount === 1) {
@@ -54,19 +49,18 @@ async function saveEdit() {
 <template>
     <div v-if="!editAvailable" class="page-container">
         <div class="image-container">
-            <img class="image" :src="`https://lh3.google.com/u/0/d/${currentPost.imageId}`" alt="Post Image" />
+            <img class="image" :src="`${postsStore.currentPost.imageLink}`" alt="Post Image" />
         </div>
         <div class="text-container">
             <div class="header-container">
-                <h3>{{ currentPost.title }}</h3>
-                <p>{{ currentPost.date }}</p>
+                <h3>{{ postsStore.currentPost.title }}</h3>
+                <p>{{ postsStore.currentPost.date }}</p>
             </div>
             <div class="article-container">
-                {{ currentPost }} {{ currentPost }} {{ currentPost }}
-                {{ currentPost }} {{ currentPost }} {{ currentPost }}
+                {{ postsStore.currentPost.text }}
             </div>
-            <div v-if="currentPost.lastModified" class="footer-container">
-                <p> Editado pela última vez em {{ currentPost.lastModified }}</p>
+            <div v-if="postsStore.currentPost.lastModified" class="footer-container">
+                <p> Editado pela última vez em {{ postsStore.currentPost.lastModified }}</p>
             </div>
         </div>
         <div class="buttons-container">
@@ -77,14 +71,14 @@ async function saveEdit() {
         <div class="image-container">
             <img class="image" :src=modifiablePost.imageLink alt="Post Image" />
             Link da imagem (google drive)
-            <input type="text" :value="modifiablePost.imageLink">
+            <input type="text" :value="modifiablePost.imageLink" id="newImageLink">
         </div>
         <div class="text-container">
             <div class="header-container">
-                <input type="text" :value="modifiablePost.title">
+                <input type="text" :value="modifiablePost.title" id="newTitle">
             </div>
             <div class="article-container">
-                <textarea></textarea>
+                <textarea :value="modifiablePost.text" id="newText"></textarea>
             </div>
         </div>
         <div class="buttons-container">

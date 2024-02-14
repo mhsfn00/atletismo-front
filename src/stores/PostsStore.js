@@ -35,7 +35,7 @@ export const usePostsStore = defineStore("PostsStore", {
         
         async getPostWithId (postId) {
             try { 
-                const url = `api/post/${postId}`;
+                const url = `/api/posts/${postId}`;
                 const response = await axios.get(url);
                 this.currentPost = response.data;
             } catch (err) {
@@ -45,20 +45,16 @@ export const usePostsStore = defineStore("PostsStore", {
 
         async editPostWithId (modifiedPost) {
             try {
-                const url = `api/editPost`;
+                console.log(modifiedPost);
+                const postId = modifiedPost.id;
+                const url = `/api/posts/${postId}/editPost`;
                 const response = await axios.post(url, modifiedPost);
 
                 return response.data;   
             } catch (err) {
+                console.log("here");
                 console.log(err.response);
             }
         }
     },
-
-    getters: {
-        getPostsFromStore() {
-            return this.posts;
-        }
-    }
 });
-
