@@ -1,5 +1,4 @@
 <script setup>
-// import { storeToRefs } from 'pinia';
 import { usePostsStore } from '../stores/PostsStore.js';
 import { onMounted } from 'vue';
 
@@ -50,10 +49,36 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
+        <div class="button-container">
+            <button class="button">
+                Mais histórias
+            </button>
+        </div>
     </div>
 </template>
 
 <style scoped>
+.button {
+    background-color: var(--verde-main);
+    border-radius: 3px;
+    text-align: center;
+    text-wrap: nowrap;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    padding: 14px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1vh 0;
+}
+
 .image-container:hover {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
     height: 100%;
@@ -70,20 +95,20 @@ onMounted(async () => {
 }
 
 .main-subject-date {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .main-title {
-    font-size: 30px;
+    font-size: 28px;
 }
 
 .secondary-title {
-    font-size: 25px;
+    font-size: 22px;
 
 }
 
 .secondary-subject-date {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .overlay-text {

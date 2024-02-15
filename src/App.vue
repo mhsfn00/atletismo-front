@@ -9,7 +9,7 @@ const logoutPopup = ref(false);
 const loggedUser = ref(null);
 const userIdentityLetter = ref('');
 
-const logoId = ref("1etG4XZKAcdPVg7tRjhpPTrRBp4ZYWdmS");
+const logoLink = ref("https://i.postimg.cc/B8cLkWyq/LOGO-PRETA.png");
 
 function showHideLoginPopup() {
     loginPopup.value = !loginPopup.value;
@@ -64,7 +64,7 @@ async function logout() {
     <div>
         <ul class="navbar">
             <router-link to="/" class="container-home-image link-nostyling">
-                <img class="logo-navbar" :src="`https://lh3.google.com/u/0/d/${logoId}`" alt="logo" />
+                <img class="logo-navbar" :src="`${logoLink}`" alt="logo" />
             </router-link>
             <div class="navbar-container-buttons">
                 <router-link to="/" class="link-nostyling">
@@ -132,6 +132,7 @@ async function logout() {
     height: 55px;
     width: 80px;
     cursor: pointer;
+    margin-right: 14vw;
 }
 
 .navbar-container-buttons {
@@ -146,6 +147,7 @@ async function logout() {
     height: 55px;
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .navbar-button:hover, .login-button:hover, .logout-button:hover {
@@ -156,6 +158,7 @@ async function logout() {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-left: 14vw;
 }
 
 .search-navbar {
@@ -166,7 +169,7 @@ async function logout() {
 .logo-navbar {
     width: 39px;
     height: 45px;
-    margin-left: 25px;
+    margin: 0 1.5vw;
 }
 
 .navbar {
