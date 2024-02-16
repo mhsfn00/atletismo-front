@@ -22,6 +22,7 @@
 
 .page-container {
     margin: 0 12vw;
+    z-index: 0;
 }
 
 .button {

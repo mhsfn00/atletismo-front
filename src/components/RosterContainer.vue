@@ -14,18 +14,26 @@ onMounted(async () => {
 
 function selectWomensRoster() {
     currentRoster.value = 'women';
+    document.getElementById('womensRoster').style.backgroundColor = "var(--verde-main)";
+    document.getElementById('womensRoster').style.filter = "brightness(1)";
+    document.getElementById('mensRoster').style.backgroundColor = "var(--laranja-main)";
+    document.getElementById('mensRoster').style.filter = "brightness(1.5)";
 }
 
 function selectMensRoster() {
     currentRoster.value = 'men';
+    document.getElementById('womensRoster').style.backgroundColor = "var(--laranja-main)";
+    document.getElementById('womensRoster').style.filter = "brightness(1.5)";
+    document.getElementById('mensRoster').style.backgroundColor = "var(--verde-main)";
+    document.getElementById('mensRoster').style.filter = "brightness(1.0)";
 }
 </script>
 
 <template>
     <div class="page-container">
         <div class="button-container">
-            <button class="button womens-roster" @click="selectWomensRoster">Feminino</button>
-            <button class="button mens-roster" @click="selectMensRoster">Masculino</button>
+            <button class="button womens-roster" @click="selectWomensRoster" id="womensRoster">Feminino</button>
+            <button class="button mens-roster" @click="selectMensRoster" id="mensRoster">Masculino</button>
         </div>
         <div v-if="currentRoster === 'women'" class="roster">
             <div class="roster-picture-container">
@@ -37,15 +45,15 @@ function selectMensRoster() {
                         <img class="athlete-picture" :src="`${athlete.pictureLink || defaultPictureLink}`" />
                         <div class="attributes-name">
                             <div class="attributes">
-                                {{ athlete.height }} / {{ athlete.weight }} / {{ athlete.events }}
+                                {{ athlete.height }} cm / {{ athlete.weight }} kg / {{ athlete.events }}
                             </div>
                             <div class="name">
                                 {{ athlete.name }}
                             </div>
                         </div>
                     </div>
-                    <div class="right-size">
-                        {{ athlete.year }}
+                    <div class="right-side">
+                        {{ athlete.year }}º Ano
                     </div>
                 </div>
             </div>
@@ -56,9 +64,19 @@ function selectMensRoster() {
             </div>
             <div class="roster-container">
                 <div v-for="(athlete, index) in athletesStore.mensRoster" :key="index" class="athlete-card">
-                    <img class="athlete-picture" :src="`${athlete.pictureLink || defaultPictureLink}`" />
-                    <div class="athlete-info">
-                        {{ athlete }}
+                    <div class="left-side">
+                        <img class="athlete-picture" :src="`${athlete.pictureLink || defaultPictureLink}`" />
+                        <div class="attributes-name">
+                            <div class="attributes">
+                                {{ athlete.height }} cm / {{ athlete.weight }} kg / {{ athlete.events }}
+                            </div>
+                            <div class="name">
+                                {{ athlete.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        {{ athlete.year }}º Ano
                     </div>
                 </div>
             </div>
@@ -67,15 +85,47 @@ function selectMensRoster() {
 </template>
 
 <style scoped>
+.athlete-card {
+    color: gray;
+    font-weight: bold;
+}
+
+.right-side {
+    padding: 20px;
+}
+
+.name {
+    font-size: 28px;
+}
+
+.attributes-name {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+.button {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 16px;
+    width: auto;
+    height: auto;
+    padding: 5px 15px 5px 15px;
+}
+
+.mens-roster {
+    background-color: var(--laranja-main);
+    filter: brightness(1.3);
+}
+
+.womens-roster {
+    background-color: var(--verde-main);
+}
+
 .left-side {
     display: flex;
     flex-direction: row;
-}
-
-.button{
-    width: auto;
-    height: auto;
-    padding: 5px;
 }
 
 .button-container {
@@ -93,7 +143,6 @@ function selectMensRoster() {
     display: flex;
     flex-direction: row;
     background-color: rgb(241, 241, 241);
-    border: 2px solid var(--laranja-main);
     justify-content: space-between;
 }
 
@@ -106,7 +155,7 @@ function selectMensRoster() {
 
 .roster-picture-container {
     height: 86vh;
-    border: 3px solid var(--verde-main);
-    border-radius: 3px;
+    border: 2px solid var(--verde-main);
+    border-radius: 0 3px 3px 3px;
 }
 </style>

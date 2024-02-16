@@ -20,7 +20,6 @@ function showHideLogoutPopup() {
 }
 
 async function loginEmailPassword() { 
-    // Login using email and password (account was created in the firebase console, might keep it that way)
     const auth = getAuth();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -133,6 +132,7 @@ async function logout() {
     width: 80px;
     cursor: pointer;
     margin-right: 14vw;
+    padding: 35px 0;
 }
 
 .navbar-container-buttons {
@@ -143,7 +143,7 @@ async function logout() {
 .navbar-button {
     display: flex;
     align-items: center;
-    padding: 0 36px;
+    padding: 35px 36px;
     height: 55px;
     font-weight: bold;
     font-size: 18px;
@@ -152,6 +152,18 @@ async function logout() {
 
 .navbar-button:hover, .login-button:hover, .logout-button:hover {
     background-color: var(--verde-hover);
+}
+
+@keyframes buttonHover {
+    from {width: 1%;}
+    to {width: 100%;}
+    /*
+    To put in a separate div
+     background-image: linear-gradient(0deg, 
+        var(--laranja-main) 10%, var(--verde-hover) 10%, var(--verde-hover) 100%);
+    animation: buttonHover 0.3s;
+    animation-delay: 0;
+    animation-direction:normal; */
 }
 
 .container-home-image {
@@ -167,8 +179,8 @@ async function logout() {
 }
 
 .logo-navbar {
-    width: 39px;
-    height: 45px;
+    width: 45px;
+    height: 51px;
     margin: 0 1.5vw;
 }
 
@@ -176,11 +188,11 @@ async function logout() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0;
     background-color: var(--verde-main);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: sticky;
     top: 0;
     width: 100%;
+    z-index: 1;
 }
 </style>
