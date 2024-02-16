@@ -33,9 +33,19 @@ function selectMensRoster() {
             </div>
             <div class="roster-container">
                 <div v-for="(athlete, index) in athletesStore.womensRoster" :key="index" class="athlete-card">
-                    <img class="athlete-picture" :src="`${athlete.pictureLink || defaultPictureLink}`" />
-                    <div class="athlete-info">
-                        {{ athlete }}
+                    <div class="left-side">
+                        <img class="athlete-picture" :src="`${athlete.pictureLink || defaultPictureLink}`" />
+                        <div class="attributes-name">
+                            <div class="attributes">
+                                {{ athlete.height }} / {{ athlete.weight }} / {{ athlete.events }}
+                            </div>
+                            <div class="name">
+                                {{ athlete.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-size">
+                        {{ athlete.year }}
                     </div>
                 </div>
             </div>
@@ -57,40 +67,46 @@ function selectMensRoster() {
 </template>
 
 <style scoped>
-    .button{
-        width: auto;
-        height: auto;
-        padding: 5px;
-    }
+.left-side {
+    display: flex;
+    flex-direction: row;
+}
 
-    .button-container {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+.button{
+    width: auto;
+    height: auto;
+    padding: 5px;
+}
 
-    .athlete-picture {
-        width: 170px;
-        height: 170px;
-    }
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
-    .athlete-card {
-        display: flex;
-        flex-direction: row;
-        background-color: rgb(241, 241, 241);
-        border: 2px solid var(--laranja-main);
-    }
+.athlete-picture {
+    width: 170px;
+    height: 170px;
+}
 
-    .roster-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-    }
+.athlete-card {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(241, 241, 241);
+    border: 2px solid var(--laranja-main);
+    justify-content: space-between;
+}
 
-    .roster-picture-container {
-        height: 86vh;
-        border: 3px solid var(--verde-main);
-        border-radius: 3px;
-    }
+.roster-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.roster-picture-container {
+    height: 86vh;
+    border: 3px solid var(--verde-main);
+    border-radius: 3px;
+}
 </style>
