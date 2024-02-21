@@ -6,12 +6,14 @@ import CoachesPage from '../pages/CoachesPage.vue';
 import RosterPage from '../pages/RosterPage.vue';
 import PostPage from '../pages/PostPage.vue';
 import NewPostPage from '../pages/NewPostPage.vue';
+import SchedulePage from '../pages/SchedulePage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
     { path: '/about', component: AboutPage },
     { path: '/roster', component: RosterPage },
     { path: '/coaches', component: CoachesPage },
+    { path: '/schedule', component: SchedulePage},
     { path: '/post/:postId', component: PostPage },
     { path: '/newPost', component: NewPostPage },
     { path: '/:pathMatch(.*)*', component: NotFound },
@@ -20,6 +22,7 @@ const routes = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
+    linkExactActiveClass: "active",
 })
 
 export default router;

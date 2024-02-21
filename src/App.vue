@@ -2,7 +2,7 @@
 // This file works as a main file, with the nav bar and the routing
 import { ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { focusOnNextField } from '@/helpers/helpers.js';
+import { focusOnField } from '@/helpers/helpers.js';
 
 const loginPopup = ref(false); 
 const logoutPopup = ref(false);
@@ -68,7 +68,7 @@ async function logout() {
             <div class="navbar-container-buttons">
                 <router-link to="/" class="link-nostyling">
                     <div class="navbar-button">
-                        INICIO
+                        INICÍO
                     </div>
                 </router-link>
                 <router-link to="/roster" class="link-nostyling">
@@ -79,6 +79,11 @@ async function logout() {
                 <router-link to="/coaches" class="link-nostyling">
                     <div class="navbar-button">
                         TREINADORES
+                    </div>
+                </router-link>
+                <router-link to="/schedule" class="link-nostyling">
+                    <div class="navbar-button">
+                        CALENDÁRIO
                     </div>
                 </router-link>
                 <router-link to="/about" class="link-nostyling">
@@ -99,7 +104,7 @@ async function logout() {
             </div>
         </ul>
         <div v-if="loginPopup" class="login-popup" id="loginPopup">
-            Email <input id="email" value="mhsfn00@gmail.com" @keyup.enter="focusOnNextField('password')" /> <!-- value set so i dont need to type the email every time -->
+            Email <input id="email" value="mhsfn00@gmail.com" @keyup.enter="focusOnField('password')" /> <!-- value set so i dont need to type the email every time -->
             Senha <input id="password" type="password" @keyup.enter="loginEmailPassword"/>
             <button @click="loginEmailPassword">Entrar</button>
         </div>
@@ -113,13 +118,13 @@ async function logout() {
 
 <style scoped>
 .login-popup, .logout-popup {
-    background-color:aquamarine;
+    background-color:var(--green-main);
     display: flex;
     flex-direction: column;
     width: 10vw;
     position: fixed;
-    top: 5%;
-    right: 5%;
+    top: 9%;
+    right: 4%;
     padding: 5px;
     gap: 3px;
 }
@@ -145,26 +150,23 @@ async function logout() {
     align-items: center;
     padding: 35px 36px;
     height: 55px;
-    font-weight: bold;
-    font-size: 18px;
+    font-weight: 500;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.5s ease-out;
 }
 
-.navbar-button:hover, .login-button:hover, .logout-button:hover {
-    background-color: var(--verde-hover);
+.active .navbar-button {
+    background: var(--green-hover);
 }
 
-@keyframes buttonHover {
-    from {width: 1%;}
-    to {width: 100%;}
-    /*
-    To put in a separate div
-     background-image: linear-gradient(0deg, 
-        var(--laranja-main) 10%, var(--verde-hover) 10%, var(--verde-hover) 100%);
-    animation: buttonHover 0.3s;
-    animation-delay: 0;
-    animation-direction:normal; */
+.navbar-button:hover {
+    background: var(--green-hover);
 }
+
+/* .navbar-button:hover, .login-button:hover, .logout-button:hover {
+    background-color: var(--green-hover);
+} */
 
 .container-home-image {
     display: flex;
@@ -188,8 +190,7 @@ async function logout() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--verde-main);
-    margin-bottom: 10px;
+    background-color: var(--green-main);
     position: sticky;
     top: 0;
     width: 100%;

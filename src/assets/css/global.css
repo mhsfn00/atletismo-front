@@ -1,7 +1,8 @@
 :root {
-    --verde-main: #00B362;
-    --laranja-main: #F3653F;
-    --verde-hover: rgb(0, 211, 116);
+    --green-main: #00B362;
+    --green-hover: rgb(0, 211, 116);
+    --orange-main: #F3653F;
+    --orange-hover: #FF975E;
 }
 
 * {
@@ -21,7 +22,7 @@
 }
 
 .page-container {
-    margin: 0 12vw;
+    margin: 10px 12vw;
     z-index: 0;
 }
 

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="page-container">
         <h1>Treinadores</h1>
     </div>
 </template>

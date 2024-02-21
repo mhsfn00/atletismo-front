@@ -59,7 +59,7 @@ onMounted(async () => {
 
 <style scoped>
 .button {
-    background-color: var(--verde-main);
+    background-color: var(--green-main);
     border-radius: 3px;
     text-align: center;
     text-wrap: nowrap;

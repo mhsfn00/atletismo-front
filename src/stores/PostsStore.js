@@ -45,14 +45,12 @@ export const usePostsStore = defineStore("PostsStore", {
 
         async editPostWithId (modifiedPost) {
             try {
-                console.log(modifiedPost);
                 const postId = modifiedPost.id;
                 const url = `/api/posts/${postId}/editPost`;
                 const response = await axios.post(url, modifiedPost);
 
                 return response.data;   
             } catch (err) {
-                console.log("here");
                 console.log(err.response);
             }
         }
