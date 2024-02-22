@@ -1,6 +1,7 @@
 <script setup>
 import { usePostsStore } from '../stores/PostsStore.js';
 import { onMounted } from 'vue';
+import PostThumbnail from '@/components/PostThumbnail.vue';
 
 const postsStore = usePostsStore();
 
@@ -14,44 +15,23 @@ onMounted(async () => {
         <div class="posts-container">
             <div class="main-posts-container">
                 <div class="main-post-card">
-                    <router-link class="link-nostyling image-container" :to="{path:`post/${postsStore.mainPost.id}`}">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Athletics_%2836099368890%29.jpg/1280px-Athletics_%2836099368890%29.jpg" class="post-image" />
-                            <div class="shadow-overlay"></div>
-                            <div class="overlay-text">
-                                <p class="main-subject-date">{{ "Track and Field | " + postsStore.mainPost.date }}</p>
-                                <p class="main-title">{{ postsStore.mainPost.title }}</p>
-                            </div>
-                    </router-link>
+                    <PostThumbnail :post="postsStore.mainPost" :mainPost="true" />
                 </div>
                 <div class="secondary-posts-container">
                     <div v-for="(post, index) in postsStore.secondaryPosts" :key="index" class="secondary-post-card">
-                        <router-link class="link-nostyling image-container" :to="{path:`post/${post.id}`}">
-                            <img src="//live.staticflickr.com/5021/5618703271_c8231cfe1c_h.jpg" class="post-image" />
-                            <div class="shadow-overlay"></div>
-                            <div class="overlay-text">
-                                <p class="secondary-subject-date">{{ "Track and Field | " + post.date }}</p>
-                                <p class="secondary-title">{{ post.title }}</p>
-                            </div>
-                        </router-link>
+                        <PostThumbnail :post="post" />
                     </div>
                 </div>
             </div>
             <div class="extra-posts-container">
                 <div v-for="(post, index) in postsStore.extraPosts" :key="index" class="extra-post-card">
-                    <router-link class="link-nostyling image-container" :to="{path:`post/${post.id}`}">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/For_athletics.jpg/800px-For_athletics.jpg" class="post-image" />
-                        <div class="shadow-overlay"></div>
-                        <div class="overlay-text">
-                            <p class="secondary-subject-date">{{ "Track and Field | " + post.date }}</p>
-                            <p class="secondary-title">{{ post.title }}</p>
-                        </div>
-                    </router-link>
+                    <PostThumbnail :post="post" />
                 </div>
             </div>
         </div>
         <div class="button-container">
             <button class="button">
-                Mais histórias
+                MAIS HISTÓRIAS
             </button>
         </div>
     </div>
@@ -63,12 +43,13 @@ onMounted(async () => {
     border-radius: 3px;
     text-align: center;
     text-wrap: nowrap;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
     width: auto;
-    padding: 14px;
+    padding: 20px 50px;
 }
 
 .button-container {
@@ -77,53 +58,6 @@ onMounted(async () => {
     justify-content: center;
     align-items: center;
     margin: 1vh 0;
-}
-
-.image-container:hover {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
-    height: 100%;
-    border-radius: 3px;
-}
-
-.shadow-overlay {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, black 100%);
-    position: absolute;
-    width: 100%;
-    height: 40%;
-    bottom: 0;
-    border-radius: 3px;
-}
-
-.main-subject-date {
-    font-size: 16px;
-}
-
-.main-title {
-    font-size: 28px;
-}
-
-.secondary-title {
-    font-size: 22px;
-
-}
-
-.secondary-subject-date {
-    font-size: 14px;
-}
-
-.overlay-text {
-    position: absolute;
-    left: 2%;
-    bottom: 5%;
-    font-weight: bold;
-}
-
-.image-container {
-    position: relative;
-    color: white;
-    display: flex;
-    width: 100%;
-    height: 100%;
 }
 
 .main-post-card {

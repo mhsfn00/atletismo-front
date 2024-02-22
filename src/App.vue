@@ -164,10 +164,6 @@ async function logout() {
     background: var(--green-hover);
 }
 
-/* .navbar-button:hover, .login-button:hover, .logout-button:hover {
-    background-color: var(--green-hover);
-} */
-
 .container-home-image {
     display: flex;
     flex-direction: row;
