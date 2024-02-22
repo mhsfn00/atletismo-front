@@ -1,11 +1,11 @@
 <script setup>
+import ScheduleContainer from '@/components/ScheduleContainer.vue';
 
+const season = 2024;
 </script>
 
 <template>
-    <div class="page-container">
-        <h1>Calendário</h1>
-    </div>
+    <ScheduleContainer :season="season"/>
 </template>
 
 <style scoped>
