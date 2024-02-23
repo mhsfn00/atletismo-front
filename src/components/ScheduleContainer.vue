@@ -12,7 +12,7 @@ const event = {
     city: 'Maringá',
     state: 'PR',
     location: 'Pista de atletismo da UEM',
-    date: new Date(),
+    date: 'YYYY/MM/DD',
 }
 </script>
 

@@ -57,7 +57,7 @@ onMounted(async () => {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 1vh 0;
+    margin-top: 2vh;
 }
 
 .main-post-card {

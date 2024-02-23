@@ -124,7 +124,7 @@ async function logout() {
     width: 10vw;
     position: fixed;
     top: 9%;
-    right: 4%;
+    right: 0;
     padding: 5px;
     gap: 3px;
 }
