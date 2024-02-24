@@ -76,7 +76,7 @@ async function logout() {
                         ATLETAS
                     </div>
                 </router-link>
-                <router-link to="/coaches" class="link-nostyling">
+                <router-link to="/coaches" class="link-nostyling" style="display: none;">
                     <div class="navbar-button">
                         TREINADORES
                     </div>
