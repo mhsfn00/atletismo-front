@@ -1,10 +1,12 @@
 <script setup>
 import { useRoute } from 'vue-router';
-import { usePostsStore } from '../stores/PostsStore.js';
-import { defineProps, ref, onMounted } from 'vue';
+import { usePostsStore } from '@/stores/PostsStore.js';
+import { useUsersStore } from '@/stores/UsersStore';
+import { ref, onMounted } from 'vue';
 
 const currentPostId = useRoute().params.postId;
 const postsStore = usePostsStore();
+const usersStore = useUsersStore();
 
 onMounted(async () =>  {
     await postsStore.getPostWithId(currentPostId);
@@ -12,10 +14,6 @@ onMounted(async () =>  {
 
 const editAvailable = ref(false);
 const modifiablePost = ref(null); 
-
-const props = defineProps({
-    loggedUser: null
-});
 
 function enableEdit() {
     modifiablePost.value = postsStore.currentPost;
@@ -64,7 +62,7 @@ async function saveEdit() {
             </div>
         </div>
         <div class="buttons-container">
-            <button class="action button" v-if="props.loggedUser" @click="enableEdit">Editar</button>
+            <button class="action button" v-if="usersStore.loggedUser" @click="enableEdit">Editar</button>
         </div>
     </div>
     <div v-else class="page-container">

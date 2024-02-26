@@ -10,7 +10,7 @@ defineProps ({
 <template>
     <div class="person-card">
         <div class="left-side">
-            <img class="athlete-picture" :src="`${person.pictureLink || defaultPictureLink}`" />
+            <img class="person-picture" :src="`${person.pictureLink || defaultPictureLink}`" />
             <div class="attributes-name">
                 <div class="attributes">
                     {{ person.height }} cm / {{ person.weight }} kg / {{ person.events }}
@@ -21,7 +21,7 @@ defineProps ({
             </div>
         </div>
         <div class="right-side">
-            {{ person.year }}º Ano
+            {{ person.year }}º Ano / Cidade, Estado / Ensino Médio
         </div>
     </div>
 </template>
@@ -32,7 +32,7 @@ defineProps ({
     flex-direction: row;
 }
 
-.athlete-picture {
+.person-picture {
     width: 80px;
     height: 100px;
     align-self: center;
@@ -40,8 +40,8 @@ defineProps ({
 }
 
 .person-card {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 60% 40%;
     background-color: rgb(241, 241, 241);
     justify-content: space-between;
     color: gray;

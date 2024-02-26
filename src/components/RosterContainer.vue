@@ -5,7 +5,7 @@ import { changeBackgroundColor } from '@/helpers/helpers';
 import PersonCard from '@/components/PersonCard.vue';
 
 const athletesStore = useAthletesStore();
-const currentRoster = ref('women');
+const currentRoster = ref('female');
 
 onMounted(async () => {
     await athletesStore.getAthletes();
@@ -13,39 +13,39 @@ onMounted(async () => {
 
 function selectRoster(rosterName) {
     currentRoster.value = rosterName;
-    const oppositeName = rosterName === 'men' ? 'women' : 'men';
+    const oppositeName = rosterName === 'male' ? 'female' : 'male';
 
-    changeBackgroundColor('var(--orange-hover)', `${rosterName}sRoster`);
-    changeBackgroundColor('var(--green-hover)', `${oppositeName}sRoster`);
+    changeBackgroundColor('var(--orange-hover)', `${rosterName}Roster`);
+    changeBackgroundColor('var(--green-hover)', `${oppositeName}Roster`);
 }
 </script>
 
 <template>
     <div class="secondary-navbar">
-        <div class="secondary-navbar-button womens-roster" 
-        @click="selectRoster('women')" id="womensRoster">
+        <div class="secondary-navbar-button female-roster" 
+        @click="selectRoster('female')" id="femaleRoster">
             Feminino
         </div>
-        <div class="secondary-navbar-button mens-roster" 
-        @click="selectRoster('men')" id="mensRoster">
+        <div class="secondary-navbar-button male-roster" 
+        @click="selectRoster('male')" id="maleRoster">
             Masculino
         </div>
     </div>
     <div class="page-container">
-        <div v-if="currentRoster === 'women'" class="roster">
+        <div v-if="currentRoster === 'female'" class="roster">
             <div class="roster-picture-container">
                 <img class="roster-picture" />
             </div>
             <div class="roster-container">
-                <PersonCard v-for="(athlete, index) in athletesStore.womensRoster" :key="index" :person="athlete" />
+                <PersonCard v-for="(athlete, index) in athletesStore.femaleRoster" :key="index" :person="athlete" />
             </div>
         </div>
-        <div v-if="currentRoster === 'men'" class="roster">
+        <div v-if="currentRoster === 'male'" class="roster">
             <div class="roster-picture-container">
                 <img class="roster-picture" />
             </div>
             <div class="roster-container">
-                <PersonCard v-for="(athlete, index) in athletesStore.mensRoster" :key="index" :person="athlete" />
+                <PersonCard v-for="(athlete, index) in athletesStore.maleRoster" :key="index" :person="athlete" />
             </div>
         </div>
     </div>
@@ -71,11 +71,11 @@ function selectRoster(rosterName) {
     border-radius: 0px 0px 10px 10px;
 }
 
-.mens-roster {
+.male-roster {
     background-color: var(--green-hover);
 }
 
-.womens-roster {
+.female-roster {
     background-color: var(--orange-hover);
 }
 

@@ -1,15 +1,27 @@
 <script setup>
-// This file works as a main file, with the nav bar and the routing
 import { ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { focusOnField } from '@/helpers/helpers.js';
+import { useUsersStore } from '@/stores/UsersStore.js';
 
+const usersStore = useUsersStore();
 const loginPopup = ref(false); 
 const logoutPopup = ref(false);
-const loggedUser = ref(null);
-const userIdentityLetter = ref('');
 
 const logoLink = ref("https://i.postimg.cc/B8cLkWyq/LOGO-PRETA.png");
+
+
+async function loginEmailPassword() { 
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    await usersStore.login(email, password);
+
+    showHideLoginPopup();
+}
+
+async function logout() {
+    usersStore.logout();
+    showHideLogoutPopup();
+}
 
 function showHideLoginPopup() {
     loginPopup.value = !loginPopup.value;
@@ -17,45 +29,6 @@ function showHideLoginPopup() {
 
 function showHideLogoutPopup() {
     logoutPopup.value = !logoutPopup.value;
-}
-
-async function loginEmailPassword() { 
-    const auth = getAuth();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            loggedUser.value = user;
-            userIdentityLetter.value = user.email.charAt(0).toUpperCase();
-            alert("Login Succesfull"); 
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            alert("Login Failed");
-        });
-    
-    showHideLoginPopup();
-}
-
-async function logout() {
-    const auth = getAuth();
-    signOut(auth)
-        .then(function() {
-            loggedUser.value = null;
-            alert("Sign out successful");
-        })
-        .catch(function(error) {
-            alert("Something went wrong when signing out");
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-        });
-    
-    showHideLogoutPopup();
 }
 </script>
 
@@ -92,7 +65,7 @@ async function logout() {
                     </div>
                 </router-link>
             </div>
-            <div v-if="!loggedUser" class="login-button" @click="showHideLoginPopup">
+            <div v-if="!usersStore.loggedUser" class="login-button" @click="showHideLoginPopup">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                     <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 
                     482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 
@@ -100,7 +73,7 @@ async function logout() {
                 </svg>
             </div>
             <div v-else class="logout-button" @click="showHideLogoutPopup">
-                {{ userIdentityLetter }}
+                {{ usersStore.userIdentityLetter }}
             </div>
         </ul>
         <div v-if="loginPopup" class="login-popup" id="loginPopup">
@@ -111,8 +84,9 @@ async function logout() {
         <div v-if="logoutPopup" class="logout-popup" id="logoutPopup">
             <button @click="logout">Sair</button>
             <router-link to="/newPost" @click="showHideLogoutPopup">Criar Post</router-link>
+            <router-link to="/newAthletes" @click="showHideLogoutPopup">Adicionar Atletas</router-link>
         </div>
-        <router-view :loggedUser="loggedUser"></router-view>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -123,7 +97,7 @@ async function logout() {
     flex-direction: column;
     width: 10vw;
     position: fixed;
-    top: 9%;
+    top: 75px;
     right: 0;
     padding: 5px;
     gap: 3px;

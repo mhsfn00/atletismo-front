@@ -3,9 +3,9 @@ import axios from 'axios';
 
 export const useAthletesStore = defineStore("AthletesStore", {
     state: () => ({
-        womensRoster: [],
+        femaleRoster: [],
 
-        mensRoster: [],
+        maleRoster: [],
 
         currentAthlete: {},
     }),
@@ -16,11 +16,9 @@ export const useAthletesStore = defineStore("AthletesStore", {
                 const url = '/api/athletes';
                 const response = await axios.get(url);      
 
-                const women = response.data.find(object => object.sex === "women").athletes;
-                this.womensRoster = women;
+                this.femaleRoster = response.data.find(object => object.sex === "female").athletes;
 
-                const men = response.data.find(object => object.sex === "men").athletes;
-                this.mensRoster = men;
+                this.maleRoster = response.data.find(object => object.sex === "male").athletes;
             } catch (err) {
                 console.log(err.response);
             }

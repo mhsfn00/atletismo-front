@@ -1,37 +1,22 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 import { focusOnField } from '@/helpers/helpers';
+import { useUsersStore } from '@/stores/UsersStore';
 
+const usersStore = useUsersStore();
 const imageLink = ref(null); 
 
-const props = defineProps ({
-    loggedUser: null 
-});
-
-// Setup to work with a google drive sharing link
-function getImageIdFromShareLink (imageShareLink) {
-    const imageIdStartIndex = imageShareLink.indexOf('/d/') + 3;
-    const imageIdEndIndex = imageShareLink.indexOf('/view');
-    const imageId = imageShareLink.substring(imageIdStartIndex, imageIdEndIndex);
-
-    return (imageId);
-}
-
 function loadImagePreview() {
-    const imageShareLink = document.getElementById("imageLink").value;
-    const imageId = getImageIdFromShareLink(imageShareLink);
-
-    imageLink.value = `https://lh3.google.com/u/0/d/${imageId}`;
+    imageLink.value = document.getElementById("imageLink").value;
 }
 
 function saveNewPost() {
     // Validate for empty fields (its own function?)
-    const imageShareLink = document.getElementById("imageLink").value;
-    if (!imageShareLink) {
+    const imageLink = document.getElementById("imageLink").value;
+    if (!imageLink) {
         alert("Link para imagem obrigatório");
         return; 
     }
-    const imageId = getImageIdFromShareLink(imageShareLink);
 
     const title = document.getElementById("title").value;
     if (!title) {
@@ -47,7 +32,7 @@ function saveNewPost() {
 
     // Saving
     const newPost = {
-        imageId : imageId,
+        imageLink : imageLink,
         title: title,
         text: text, 
     }
@@ -57,7 +42,7 @@ function saveNewPost() {
 </script>
 
 <template>
-    <div v-if="props.loggedUser">
+    <div v-if="usersStore.loggedUser">
         <div class="page-container">
             <div class="imageId-container">
                 Link de compartilhamento <input class="text-input" type="text" id="imageLink" @keyup.enter="focusOnField('previewButton')" />
