@@ -46,3 +46,27 @@
 .cancel {
     background-color: #ff0000;
 }
+
+.input-label {
+    float: left;
+    padding: 4px;
+}
+
+.input-span {
+    display: flex;
+    overflow: hidden;
+}
+
+.input-actual {
+    width: 100%;
+    border: 0;
+    height: 30px;
+    font-size: medium;
+}
+
+.input-container {
+    width: 100%;
+    background: #F9F7F5;
+    border: 2px solid #F9F7F5;
+    border-radius: 6px;
+}

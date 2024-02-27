@@ -22,51 +22,93 @@ const newPersons = [
             <div class="input-container">
                 <label class="input-label" for="pictureLink">Link para foto</label> 
                 <span class="input-span">
-                    <input class="input-actual" v-model="newPersons[index].pictureLink" id="pictureLink">
+                    <input class="input-actual" v-model="newPersons[index].pictureLink" id="pictureLink" />
                 </span>
             </div>
             <div class="person-info">
                 <div class="picture-container">
-                    Preview <img class="person-picture" :src="`${defaultPictureLink}`" />
+                    <img class="person-picture" :src="`${defaultPictureLink}`" />
                 </div>
                 <div class="attributes-container">
-                    <div>Nome <input /></div>
-                    <div>Altura <input /></div>
-                    <div>Peso <input /></div>
-                    <div>Provas <input /></div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsName">Nome</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].name" id="personsName" />
+                        </span>
+                    </div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsHeight">Altura</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].height" id="personsHeight" />
+                        </span>
+                    </div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsWeight">Peso</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].weight" id="personsWeight" />
+                        </span>
+                    </div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsEvents">Provas</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].events" id="personsEvents" />
+                        </span>
+                    </div>
                 </div>
                 <div class="info-container">
-                    <div>Ano <input /></div>
-                    <div>Cidade <input /></div>
-                    <div>Estado <input /></div>
-                    <div>Ensino <input /></div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsYear">Ano</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].year" id="personsYear" />
+                        </span>
+                    </div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsCity">Cidade</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].city" id="personsCity" />
+                        </span>
+                    </div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsEvents">Estado</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].state" id="personsState" />
+                        </span>
+                    </div>
+                    <div class="input-container">
+                        <labe class="input-label" for="personsHighschool">Ensino</labe>
+                        <span class="input-span">
+                            <input class="input-actual" v-model="newPersons[index].highschool" id="personsHighschool" />
+                        </span>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="button-container">
+            <button class="button action">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="plus-sign">
+                    <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0
+                    17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+                </svg>
+            </button>
         </div>
     </div>
 </template>
 
 <style scoped>
-/* global.css */
-.input-label {
-    float: left;
+.button {
+    width: 8vw;
 }
 
-.input-span {
+.button-container{
     display: flex;
-    overflow: hidden;
-    padding-left: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
-.input-actual {
-    width: 100%;
+.plus-sign {
+    width: 80%;
+    height:70%;
 }
-
-.input-container {
-    width: 100%;
-    background: rgb(235, 235, 235);
-}
-/* global.css */
 
 .person-card {
     display: flex;
@@ -86,6 +128,8 @@ const newPersons = [
 .picture-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .person-info {
