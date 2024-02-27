@@ -36,37 +36,25 @@
 }
 
 .action {
-    background-color: #00f7ff;    
+    background: #00f7ff;    
+}
+
+.action:hover {
+    border: 2px solid #00b1b8;
 }
 
 .confirm {
-    background-color: #00ff4c;
+    background: #00ff4c;
+}
+
+.confirm:hover {
+    border: 2px solid #00c53b
 }
 
 .cancel {
-    background-color: #ff0000;
+    background: #ff0000;
 }
 
-.input-label {
-    float: left;
-    padding: 4px;
-}
-
-.input-span {
-    display: flex;
-    overflow: hidden;
-}
-
-.input-actual {
-    width: 100%;
-    border: 0;
-    height: 30px;
-    font-size: medium;
-}
-
-.input-container {
-    width: 100%;
-    background: #F9F7F5;
-    border: 2px solid #F9F7F5;
-    border-radius: 6px;
+.cancel:hover {
+    border: 2px solid #c00000;
 }

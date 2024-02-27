@@ -1,8 +1,27 @@
 <script setup>
+import CustomInput from '@/components/CustomInput.vue';
+import { ref } from 'vue';
+
 const defaultPictureLink = "//storage.needpix.com/rsynced_images/blank-profile-picture-973460_1280.png";
 
-const newPersons = [
+const personName = '';
+
+const newPersons = ref([
     {
+        pictureLink: '',
+        name: 'wawa',
+        height: '',
+        weight: '',
+        events: '',
+        year: '',
+        city: '',
+        state: '',
+        highschool: ''
+    }
+]);
+
+function addEmptyPerson() {
+    newPersons.value.push({
         pictureLink: '',
         name: '',
         height: '',
@@ -12,79 +31,47 @@ const newPersons = [
         city: '',
         state: '',
         highschool: ''
-    }
-];
+    });
+}
+
+function deletePerson(index) {
+    newPersons.value.splice(index, 1);
+}
+
+function print() {
+    console.log(personName);
+}
 </script>
 
 <template>
     <div class="page-container">
         <div class="person-card" v-for="(person, index) in newPersons" :key="index">
-            <div class="input-container">
-                <label class="input-label" for="pictureLink">Link para foto</label> 
-                <span class="input-span">
-                    <input class="input-actual" v-model="newPersons[index].pictureLink" id="pictureLink" />
-                </span>
-            </div>
+            <CustomInput :id="'pictureLink'" :text="'Link para a foto'" />
             <div class="person-info">
                 <div class="picture-container">
+                    {{ index + 1 }}
                     <img class="person-picture" :src="`${defaultPictureLink}`" />
                 </div>
                 <div class="attributes-container">
-                    <div class="input-container">
-                        <labe class="input-label" for="personsName">Nome</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].name" id="personsName" />
-                        </span>
-                    </div>
-                    <div class="input-container">
-                        <labe class="input-label" for="personsHeight">Altura</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].height" id="personsHeight" />
-                        </span>
-                    </div>
-                    <div class="input-container">
-                        <labe class="input-label" for="personsWeight">Peso</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].weight" id="personsWeight" />
-                        </span>
-                    </div>
-                    <div class="input-container">
-                        <labe class="input-label" for="personsEvents">Provas</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].events" id="personsEvents" />
-                        </span>
-                    </div>
+                    <CustomInput :id="'name'" :text="'Nome'" v-model="personName" @click="print"/>
+                    <CustomInput :id="'personsHeight'" :text="'Altura'" />
+                    <CustomInput :id="'personsWeight'" :text="'Peso'" />
+                    <CustomInput :id="'personsEvents'" :text="'Provas'" />
                 </div>
                 <div class="info-container">
-                    <div class="input-container">
-                        <labe class="input-label" for="personsYear">Ano</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].year" id="personsYear" />
-                        </span>
-                    </div>
-                    <div class="input-container">
-                        <labe class="input-label" for="personsCity">Cidade</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].city" id="personsCity" />
-                        </span>
-                    </div>
-                    <div class="input-container">
-                        <labe class="input-label" for="personsEvents">Estado</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].state" id="personsState" />
-                        </span>
-                    </div>
-                    <div class="input-container">
-                        <labe class="input-label" for="personsHighschool">Ensino</labe>
-                        <span class="input-span">
-                            <input class="input-actual" v-model="newPersons[index].highschool" id="personsHighschool" />
-                        </span>
-                    </div>
+                    <CustomInput id="'personsYear'" :text="'Ano'" />
+                    <CustomInput id="'personsCity'" :text="'Cidade'" />
+                    <CustomInput id="'personsState'" :text="'Estado'" />
+                    <CustomInput id="'personsHighschool'" :text="'Ensino'" />
                 </div>
             </div>
+            <div class="delete-button-container">
+                <button @click="deletePerson(index)">X</button>
+            </div>
         </div>
+        NOME :: <input v-model="newPersons[0].name" @click="print()"/>
         <div class="button-container">
-            <button class="button action">
+            <button class="button action" @click="addEmptyPerson()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="plus-sign">
                     <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0
                     17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
@@ -95,24 +82,33 @@ const newPersons = [
 </template>
 
 <style scoped>
+.delete-button-container {
+    position: absolute;
+    right: 8%;
+}
+
 .button {
     width: 8vw;
+    height: 4vh;
 }
 
 .button-container{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
 .plus-sign {
     width: 80%;
-    height:70%;
+    height:50%;
 }
 
 .person-card {
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
+    background: #f3f2f2;
 }
 
 .info-container {
@@ -141,7 +137,6 @@ const newPersons = [
     width: 80px;
     height: 100px;
     align-self: center;
-    margin-left: 20px;
     cursor: pointer;
 }
 </style>
