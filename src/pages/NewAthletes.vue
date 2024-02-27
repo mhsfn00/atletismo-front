@@ -1,75 +1,57 @@
 <script setup>
-import CustomInput from '@/components/CustomInput.vue';
+import GrayInput from '@/components/GrayInput.vue';
 import { ref } from 'vue';
 
 const defaultPictureLink = "//storage.needpix.com/rsynced_images/blank-profile-picture-973460_1280.png";
+const emptyAthlete = {
+    pictureLink: '',
+    name: '',
+    height: '',
+    weight: '',
+    events: '',
+    year: '',
+    city: '',
+    state: '',
+    highschool: ''
+}
 
-const personName = '';
-
-const newPersons = ref([
-    {
-        pictureLink: '',
-        name: 'wawa',
-        height: '',
-        weight: '',
-        events: '',
-        year: '',
-        city: '',
-        state: '',
-        highschool: ''
-    }
-]);
+const newPersons = ref([emptyAthlete]);
 
 function addEmptyPerson() {
-    newPersons.value.push({
-        pictureLink: '',
-        name: '',
-        height: '',
-        weight: '',
-        events: '',
-        year: '',
-        city: '',
-        state: '',
-        highschool: ''
-    });
+    newPersons.value.push(emptyAthlete);
 }
 
 function deletePerson(index) {
     newPersons.value.splice(index, 1);
-}
-
-function print() {
-    console.log(personName);
 }
 </script>
 
 <template>
     <div class="page-container">
         <div class="person-card" v-for="(person, index) in newPersons" :key="index">
-            <CustomInput :id="'pictureLink'" :text="'Link para a foto'" />
+            <GrayInput :id="'pictureLink'" :text="'Link para a foto'" />
             <div class="person-info">
                 <div class="picture-container">
                     {{ index + 1 }}
                     <img class="person-picture" :src="`${defaultPictureLink}`" />
                 </div>
                 <div class="attributes-container">
-                    <CustomInput :id="'name'" :text="'Nome'" v-model="personName" @click="print"/>
-                    <CustomInput :id="'personsHeight'" :text="'Altura'" />
-                    <CustomInput :id="'personsWeight'" :text="'Peso'" />
-                    <CustomInput :id="'personsEvents'" :text="'Provas'" />
+                    <GrayInput :id="'name'" :text="'Nome'" v-model="newPersons[index].name" />
+                    <GrayInput :id="'height'" :text="'Altura'" v-model="newPersons[index].height" />
+                    <GrayInput :id="'eeight'" :text="'Peso'" v-model="newPersons[index].weight" />
+                    <GrayInput :id="'events'" :text="'Provas'" v-model="newPersons[index].events" />
                 </div>
                 <div class="info-container">
-                    <CustomInput id="'personsYear'" :text="'Ano'" />
-                    <CustomInput id="'personsCity'" :text="'Cidade'" />
-                    <CustomInput id="'personsState'" :text="'Estado'" />
-                    <CustomInput id="'personsHighschool'" :text="'Ensino'" />
+                    <GrayInput id="'year'" :text="'Ano'" v-model="newPersons[index].year" />
+                    <GrayInput id="'city'" :text="'Cidade'" v-model="newPersons[index].city" />
+                    <GrayInput id="'state'" :text="'Estado'" v-model="newPersons[index].state" />
+                    <GrayInput id="'highschool'" :text="'Ensino'" v-model="newPersons[index].highschool" />
                 </div>
             </div>
             <div class="delete-button-container">
                 <button @click="deletePerson(index)">X</button>
             </div>
         </div>
-        NOME :: <input v-model="newPersons[0].name" @click="print()"/>
         <div class="button-container">
             <button class="button action" @click="addEmptyPerson()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="plus-sign">

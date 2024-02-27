@@ -1,11 +1,12 @@
 <script setup>
-import { defineProps, defineModel } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
-const inputValue = defineModel();
+const emit = defineEmits(['update:modelValue']);
 
 defineProps ({
     id: String,
     text: String,
+    modelValue: String,
 });
 </script>
 
@@ -13,7 +14,7 @@ defineProps ({
 <div class="input-container">
     <label class="input-label" :for="id">{{ text }}</label> 
     <span class="input-span">
-        <input class="input-actual" :id="id" v-model="inputValue" />
+        <input class="input-actual" :id="id" :value="modelValue" @input="emit('update:modelValue', $event.target.value)" />
     </span>
 </div>
 </template>
