@@ -22,6 +22,17 @@ export const useAthletesStore = defineStore("AthletesStore", {
             } catch (err) {
                 console.log(err.response);
             }
+        },
+
+        async addAthletes(newAthletes) {
+            try {
+                const url = '/api/athletes/addAthletes';
+                const response = await axios.post(url, newAthletes);
+
+                return (response);
+            } catch (err) {
+                console.log(err.response);
+            }
         }
     }
 });

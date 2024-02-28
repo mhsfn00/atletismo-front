@@ -1,8 +1,15 @@
 <script setup>
 import GrayInput from '@/components/GrayInput.vue';
 import { ref } from 'vue';
+import { useUsersStore } from '@/stores/UsersStore';
+import { useAthletesStore } from '@/stores/AthletesStore';
+import NonAuthWarning from '@/components/NonAuthWarning.vue';
+import AlertConfirm from '@/components/AlertConfirm.vue';
 
+const usersStore = useUsersStore();
+const athletesStore = useAthletesStore();
 const defaultPictureLink = "//storage.needpix.com/rsynced_images/blank-profile-picture-973460_1280.png";
+const showAlertConfirm = ref(false);
 const emptyAthlete = {
     pictureLink: '',
     name: '',
@@ -15,6 +22,31 @@ const emptyAthlete = {
     highschool: ''
 }
 
+const athletes = ref([
+    {
+        pictureLink: '1',
+        name: '1',
+        height: '1',
+        weight: '1',
+        events: '1',
+        year: '1',
+        city: '1',
+        state: '1',
+        highschool: '1'
+    },
+    {
+        pictureLink: '2',
+        name: '2',
+        height: '2',
+        weight: '2',
+        events: '2',
+        year: '2',
+        city: '2',
+        state: '2',
+        highschool: '2'
+    }
+]);
+
 const newPersons = ref([emptyAthlete]);
 
 function addEmptyPerson() {
@@ -24,10 +56,17 @@ function addEmptyPerson() {
 function deletePerson(index) {
     newPersons.value.splice(index, 1);
 }
+
+async function confirmAthletes() {
+    //send athletes to store
+    const result = await athletesStore.addAthletes(athletes.value) ;
+    console.log(result);
+    showAlertConfirm.value = false;
+}
 </script>
 
 <template>
-    <div class="page-container">
+    <div v-if="usersStore.loggedUser" class="page-container">
         <div class="person-card" v-for="(person, index) in newPersons" :key="index">
             <GrayInput :id="'pictureLink'" :text="'Link para a foto'" />
             <div class="person-info">
@@ -49,7 +88,7 @@ function deletePerson(index) {
                 </div>
             </div>
             <div class="delete-button-container">
-                <button @click="deletePerson(index)">X</button>
+                <button class="delete button cancel" @click="deletePerson(index)">x</button>
             </div>
         </div>
         <div class="button-container">
@@ -59,17 +98,33 @@ function deletePerson(index) {
                     17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
                 </svg>
             </button>
+            <button class="button confirm" @click="showAlertConfirm=true;">
+                Confirmar
+            </button>
         </div>
     </div>
+    <NonAuthWarning v-else />
+    <AlertConfirm v-if="showAlertConfirm" @confirm="confirmAthletes" @cancel="showAlertConfirm=false;"
+    :message="'Deseja confirmar os atletas?'" />
 </template>
 
 <style scoped>
 .delete-button-container {
-    position: absolute;
-    right: 8%;
+    display: flex;
+    justify-content: right;
+    padding: 5px 0;
 }
 
-.button {
+.confirm {
+    width: 8vw;
+    height: 4vh;
+}
+
+.cancel {
+    height: 3vh;
+}
+
+.action {
     width: 8vw;
     height: 4vh;
 }
@@ -79,6 +134,7 @@ function deletePerson(index) {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    gap: 10px;
 }
 
 .plus-sign {

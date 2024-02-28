@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { focusOnField } from '@/helpers/helpers';
 import { useUsersStore } from '@/stores/UsersStore';
+import NonAuthWarning from '@/components/NonAuthWarning.vue';
 
 const usersStore = useUsersStore();
 const imageLink = ref(null); 
@@ -70,9 +71,7 @@ function saveNewPost() {
             </div>
         </div>
     </div>
-    <div v-else>
-        <h1>Login needed</h1>
-    </div>
+    <NonAuthWarning v-else />
 </template>
 
 <style scoped>

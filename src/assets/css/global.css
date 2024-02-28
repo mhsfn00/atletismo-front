@@ -33,28 +33,37 @@
     border-radius: 6px;
     border: 0;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .action {
-    background: #00f7ff;    
+    background: #00f7ff;   
+    border: 2px solid #00f7ff; 
 }
 
 .action:hover {
+    background: #2ff8ff;
     border: 2px solid #00b1b8;
 }
 
 .confirm {
     background: #00ff4c;
+    border: 2px solid #00ff4c;
 }
 
 .confirm:hover {
-    border: 2px solid #00c53b
+    background: #32ff70;
+    border: 2px solid #00c53b;
 }
 
 .cancel {
     background: #ff0000;
+    border: 2px solid #ff0000;
 }
 
 .cancel:hover {
+    background: #ff2323;
     border: 2px solid #c00000;
 }
