@@ -19,7 +19,8 @@ const emptyAthlete = {
     year: '',
     city: '',
     state: '',
-    highschool: ''
+    highschool: '',
+    sex: '',
 }
 
 const athletes = ref([
@@ -32,7 +33,8 @@ const athletes = ref([
         year: '2',
         city: 'Maringá',
         state: 'Paraná',
-        highschool: 'Ensino Médio'
+        highschool: 'Ensino Médio',
+        sex: 'female'
     }
 ]);
 
@@ -69,16 +71,20 @@ async function confirmAthletes() {
                     <GrayInput :id="'height'" :text="'Altura'" v-model="newPersons[index].height" />
                     <GrayInput :id="'eeight'" :text="'Peso'" v-model="newPersons[index].weight" />
                     <GrayInput :id="'events'" :text="'Provas'" v-model="newPersons[index].events" />
+                    <div class="radio-container">
+                        <span for=""><input type="radio" name="sex" value="female" v-model="newPersons[index].sex" />Feminino</span>
+                        <span for=""><input type="radio" name="sex" value="male" v-model="newPersons[index].sex" />Masculino</span>
+                    </div>
                 </div>
                 <div class="info-container">
                     <GrayInput id="'year'" :text="'Ano'" v-model="newPersons[index].year" />
                     <GrayInput id="'city'" :text="'Cidade'" v-model="newPersons[index].city" />
                     <GrayInput id="'state'" :text="'Estado'" v-model="newPersons[index].state" />
                     <GrayInput id="'highschool'" :text="'Ensino'" v-model="newPersons[index].highschool" />
+                    <div class="delete-button-container">
+                        <button class="delete button cancel" @click="deletePerson(index)">x</button>
+                    </div>
                 </div>
-            </div>
-            <div class="delete-button-container">
-                <button class="delete button cancel" @click="deletePerson(index)">x</button>
             </div>
         </div>
         <div class="button-container">
@@ -99,6 +105,14 @@ async function confirmAthletes() {
 </template>
 
 <style scoped>
+.radio-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 5px;
+    gap: 15px;
+}
+
 .delete-button-container {
     display: flex;
     justify-content: right;
