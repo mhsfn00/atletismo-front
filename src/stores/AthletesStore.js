@@ -28,7 +28,7 @@ export const useAthletesStore = defineStore("AthletesStore", {
             try {
                 const url = `/api/athletes/addAthletes/${rosterYear}`;
                 const response = await axios.post(url, newAthletes);
-
+                console.log(response);
                 return (response);
             } catch (err) {
                 console.log(err.response);
