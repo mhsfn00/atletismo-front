@@ -8,7 +8,8 @@ const athletesStore = useAthletesStore();
 const currentRoster = ref('female');
 
 onMounted(async () => {
-    await athletesStore.getAthletes();
+    const rosterYear = '2024';
+    await athletesStore.getAthletes(rosterYear);
 });
 
 function selectRoster(rosterName) {

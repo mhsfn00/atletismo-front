@@ -16,7 +16,6 @@ export const useUsersStore = defineStore("UsersStore", {
                     const user = userCredential.user;
                     this.loggedUser = user;
                     this.userIdentityLetter = user.email.charAt(0).toUpperCase();
-                    alert("Login Succesfull"); 
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -32,7 +31,6 @@ export const useUsersStore = defineStore("UsersStore", {
             signOut(auth).
                 then(() =>  {
                     this.loggedUser = null;
-                    alert("Logout successful");
                 })
                 .catch((error) => {
                     alert ("Something went wrong when signing out");

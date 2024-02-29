@@ -24,26 +24,15 @@ const emptyAthlete = {
 
 const athletes = ref([
     {
-        pictureLink: '1',
-        name: '1',
-        height: '1',
-        weight: '1',
-        events: '1',
-        year: '1',
-        city: '1',
-        state: '1',
-        highschool: '1'
-    },
-    {
-        pictureLink: '2',
-        name: '2',
-        height: '2',
-        weight: '2',
-        events: '2',
+        pictureLink: '',
+        name: 'Atleta 4',
+        height: '180',
+        weight: '75',
+        events: '110m com Barreiras',
         year: '2',
-        city: '2',
-        state: '2',
-        highschool: '2'
+        city: 'Maringá',
+        state: 'Paraná',
+        highschool: 'Ensino Médio'
     }
 ]);
 
@@ -59,7 +48,8 @@ function deletePerson(index) {
 
 async function confirmAthletes() {
     //send athletes to store
-    const result = await athletesStore.addAthletes(athletes.value) ;
+    const rosterYear = '2024';
+    const result = await athletesStore.addAthletes(athletes.value, rosterYear) ;
     console.log(result);
     showAlertConfirm.value = false;
 }
