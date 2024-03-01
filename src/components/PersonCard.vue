@@ -4,11 +4,28 @@ const defaultPictureLink = "//storage.needpix.com/rsynced_images/blank-profile-p
 
 defineProps ({
     person: {},
+    user: {},
 });
 </script>
 
 <template>
-    <div class="person-card">
+    <div v-if="user" class="person-card-editable">
+        <div class="left-side">
+            <img class="person-picture" :src="`${person.pictureLink || defaultPictureLink}`" />
+            <div class="picture-and-buttons-editable">
+                <div class="attributes-name">
+                    <div class="name">
+                        {{ person.name }}
+                    </div>
+                </div>
+                <div v-if="user" class="button-container">
+                    <button class="button cancel remove">Remover</button>
+                    <button class="button action edit">Editar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div v-else class="person-card">
         <div class="left-side">
             <img class="person-picture" :src="`${person.pictureLink || defaultPictureLink}`" />
             <div class="attributes-name">
@@ -27,6 +44,20 @@ defineProps ({
 </template>
 
 <style scoped>
+.picture-and-buttons-editable {
+    display: flex;
+    align-items: center;
+}
+
+.person-card-editable {
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+}
+
 .left-side {
     display: flex;
     flex-direction: row;

@@ -85,6 +85,7 @@ function showHideLogoutPopup() {
             <button @click="logout">Sair</button>
             <router-link to="/newPost" @click="showHideLogoutPopup">Criar Post</router-link>
             <router-link to="/newAthletes" @click="showHideLogoutPopup">Adicionar Atletas</router-link>
+            <router-link to="/editRoster" @click="showHideLogoutPopup">Editar Atletas</router-link>
         </div>
         <router-view></router-view>
     </div>

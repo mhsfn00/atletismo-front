@@ -1,15 +1,15 @@
 <script setup>
-import { useAthletesStore } from '@/stores/AthletesStore';
+import { useRosterStore } from '@/stores/RosterStore';
 import { onMounted, ref } from 'vue';
 import { changeBackgroundColor } from '@/helpers/helpers';
 import PersonCard from '@/components/PersonCard.vue';
 
-const athletesStore = useAthletesStore();
+const rosterStore = useRosterStore();
 const currentRoster = ref('female');
 
 onMounted(async () => {
     const rosterYear = '2024';
-    await athletesStore.getAthletes(rosterYear);
+    await rosterStore.getRoster(rosterYear);
 });
 
 function selectRoster(rosterName) {
@@ -38,7 +38,7 @@ function selectRoster(rosterName) {
                 <img class="roster-picture" />
             </div>
             <div class="roster-container">
-                <PersonCard v-for="(athlete, index) in athletesStore.femaleRoster" :key="index" :person="athlete" />
+                <PersonCard v-for="(athlete, index) in rosterStore.currentRoster.female" :key="index" :person="athlete" />
             </div>
         </div>
         <div v-if="currentRoster === 'male'" class="roster">
@@ -46,7 +46,7 @@ function selectRoster(rosterName) {
                 <img class="roster-picture" />
             </div>
             <div class="roster-container">
-                <PersonCard v-for="(athlete, index) in athletesStore.maleRoster" :key="index" :person="athlete" />
+                <PersonCard v-for="(athlete, index) in rosterStore.currentRoster.male" :key="index" :person="athlete" />
             </div>
         </div>
     </div>

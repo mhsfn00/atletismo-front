@@ -8,11 +8,13 @@ import PostPage from '../pages/PostPage.vue';
 import NewPostPage from '../pages/NewPostPage.vue';
 import SchedulePage from '../pages/SchedulePage.vue';
 import NewAthletes from '../pages/NewAthletes.vue';
+import EditRosterPage from '../pages/EditRosterPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
     { path: '/about', component: AboutPage },
     { path: '/roster', component: RosterPage },
+    { path: '/editRoster', component: EditRosterPage },
     { path: '/newAthletes', component: NewAthletes },
     { path: '/coaches', component: CoachesPage },
     { path: '/schedule', component: SchedulePage},

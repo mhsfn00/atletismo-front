@@ -2,12 +2,12 @@
 import GrayInput from '@/components/GrayInput.vue';
 import { ref } from 'vue';
 import { useUsersStore } from '@/stores/UsersStore';
-import { useAthletesStore } from '@/stores/AthletesStore';
+import { useRosterStore } from '@/stores/RosterStore';
 import NonAuthWarning from '@/components/NonAuthWarning.vue';
 import AlertConfirm from '@/components/AlertConfirm.vue';
 
 const usersStore = useUsersStore();
-const athletesStore = useAthletesStore();
+const rosterStore = useRosterStore();
 const defaultPictureLink = "//storage.needpix.com/rsynced_images/blank-profile-picture-973460_1280.png";
 const showAlertConfirm = ref(false);
 const emptyAthlete = {
@@ -35,6 +35,18 @@ const athletes = ref([
         state: 'Paraná',
         highschool: 'Ensino Médio',
         sex: 'female'
+    },
+    {
+        pictureLink: '',
+        name: 'Atleta 5',
+        height: '188',
+        weight: '78',
+        events: 'Aaaa',
+        year: '5',
+        city: 'Maringá',
+        state: 'Paraná',
+        highschool: 'Ensino Médio',
+        sex: 'male'
     }
 ]);
 
@@ -49,10 +61,18 @@ function deletePerson(index) {
 }
 
 async function confirmAthletes() {
-    //send athletes to store
     const rosterYear = '2024';
-    const result = await athletesStore.addAthletes(athletes.value, rosterYear) ;
-    console.log(result);
+    const response = await rosterStore.addAthletes(athletes.value, rosterYear);
+    const results = response.data;
+    
+    if (!(results.femaleResult.modifiedCount && results.maleResult.modifiedCount)) {
+        console.log("female: ", results.femaleResult);
+        console.log("male: ", results.maleResult);
+        alert("Ao menos um atleta não foi inserido, checar log")
+    } else {
+        alert("Todos os atletas foram inseridos");
+    }
+
     showAlertConfirm.value = false;
 }
 </script>
