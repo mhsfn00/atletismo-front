@@ -64,16 +64,16 @@ async function confirmAthletes() {
     const rosterYear = '2024';
     const response = await rosterStore.addAthletes(athletes.value, rosterYear);
     const results = response.data;
-    
-    if (!(results.femaleResult.modifiedCount && results.maleResult.modifiedCount)) {
-        console.log("female: ", results.femaleResult);
-        console.log("male: ", results.maleResult);
-        alert("Ao menos um atleta não foi inserido, checar log")
-    } else {
-        alert("Todos os atletas foram inseridos");
-    }
+    console.log(results);
+    // if (!(results.femaleResult.modifiedCount && results.maleResult.modifiedCount)) {
+    //     console.log("female: ", results.femaleResult);
+    //     console.log("male: ", results.maleResult);
+    //     alert("Ao menos um atleta não foi inserido, checar log")
+    // } else {
+    //     alert("Todos os atletas foram inseridos");
+    // }
 
-    showAlertConfirm.value = false;
+    // showAlertConfirm.value = false;
 }
 </script>
 
