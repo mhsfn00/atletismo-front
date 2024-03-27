@@ -73,7 +73,7 @@ async function confirmAthletes() {
     //     alert("Todos os atletas foram inseridos");
     // }
 
-    // showAlertConfirm.value = false;
+    showAlertConfirm.value = false;
 }
 </script>
 
