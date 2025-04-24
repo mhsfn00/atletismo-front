@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 defineProps ({
-    imageSource: { type: String, default: '' }
+    imageSource: { type: String, default: '' },
+    type: { type: String, default: 'function' }
 })
 </script>
 
 <template>
-  <div class="button-container">
-      <img class="icon" :src="imageSource" />
-  </div>
+    <router-link to="/">
+        <div class="button-container">
+            <img class="icon" :src="imageSource" />
+        </div>
+    </router-link>
 </template>
 
 <style scoped>
