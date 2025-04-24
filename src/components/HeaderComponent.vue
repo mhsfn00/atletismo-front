@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import HeaderButton from './HeaderButton.vue'
 import SideBar from './SideBar.vue';
 
 const route = useRoute();
 const title = computed(() => route.name);
+
+const sideBarVisible = ref<boolean>(false);
+const toggleSidebar = () => {
+  console.log("handled event");
+  sideBarVisible.value = !sideBarVisible.value;
+}
 </script>
 
 <template>
@@ -20,9 +26,10 @@ const title = computed(() => route.name);
           :imageSource="'/images/menu.png'"
           :type="'function'"
           :execute="'toggleSidebar'"
+          @lmb-click="toggleSidebar"
         />
     </div>
-    <SideBar />
+    <SideBar v-show="sideBarVisible" :currentPage="title?.toString()" />
 </template>
 
 <style scoped>

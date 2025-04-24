@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { defineEmits } from 'vue';
 import { RouterLink } from 'vue-router';
 
 defineProps ({
@@ -7,6 +8,11 @@ defineProps ({
     address: { type: String, default: '/'},
     execute: { type: String, default: 'a function'},
 })
+
+const emit = defineEmits(['lmb-click']);
+const handleClick = () => {
+    emit('lmb-click');
+}
 </script>
 
 <template>
@@ -15,7 +21,7 @@ defineProps ({
             <img class="icon" :src="imageSource" />
         </div>
     </router-link>
-    <div v-else-if="type === 'function'" class="button-container">
+    <div v-else-if="type === 'function'" class="button-container" @click="handleClick">
         <img class="icon" :src="imageSource" />
     </div>
 </template>

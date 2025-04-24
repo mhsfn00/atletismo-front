@@ -1,19 +1,42 @@
 <script setup lang="ts">
 import SidebarButton from './SidebarButton.vue';
 
+defineProps({
+    currentPage: { type: String, default: ''}
+});
 </script>
 
 <template>
     <div class="sidebar-container">
         <SidebarButton 
             :address="'/'"
-            :text="'Início'"
+            :title="'Início'"
             :icon-address="'/images/home.png'"
+            :isCurrentPage="'home' === currentPage"
         />
         <SidebarButton 
             :address="'/about'"
-            :text="'Sobre'"
+            :title="'Sobre'"
             :icon-address="'/images/home.png'"
+            :isCurrentPage="'about' === currentPage"
+        />
+        <SidebarButton 
+            :address="'/roster'"
+            :title="'Atletas'"
+            :icon-address="'/images/home.png'"
+            :isCurrentPage="'roster' === currentPage"
+        />
+        <SidebarButton 
+            :address="'/coaches'"
+            :title="'Treinadores'"
+            :icon-address="'/images/home.png'"
+            :isCurrentPage="'coaches' === currentPage"
+        />
+        <SidebarButton 
+            :address="'/events'"
+            :title="'Eventos'"
+            :icon-address="'/images/home.png'"
+            :isCurrentPage="'events' === currentPage"
         />
     </div>
 </template>
