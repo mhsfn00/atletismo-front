@@ -4,7 +4,7 @@
 
 <template>
     <div class="page-container">
-        <h1>HOMEPAGE</h1>
+        <h1>ABOUT</h1>
     </div>
 </template>
 

@@ -1,7 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Gill Sans", sans-serif;
+}
+
+.text {
+    font-family: serif;
+}
+
 :root {
     --primary-green: #00B362;
     --primary-orange: #F3653F;
     --primary-black: #131200;
     --primary-blue: #999AC6;  
     --primary-white: #F0F0F0
+}
+
+.page-container {
+    position: absolute;
+    height: 93vh;
+    margin-top: 7vh;
+    width: 100%;
+    z-index: 0;
+    overflow: auto;
+    background-color: var(--primary-white);
 }
