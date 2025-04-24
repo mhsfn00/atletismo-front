@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import HeaderButton from './HeaderButton.vue'
+import SideBar from './SideBar.vue';
 
 const route = useRoute();
 const title = computed(() => route.name);
@@ -12,13 +13,16 @@ const title = computed(() => route.name);
         <HeaderButton 
           :imageSource="'/images/logo.png'"
           :type="'navegation'"
+          :address="'/'"
         />
         <span class="title">{{ title }}</span>
         <HeaderButton 
           :imageSource="'/images/menu.png'"
           :type="'function'"
+          :execute="'toggleSidebar'"
         />
     </div>
+    <SideBar />
 </template>
 
 <style scoped>
