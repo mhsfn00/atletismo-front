@@ -5,11 +5,11 @@ defineProps({
 </script>
 
 <template>
-    <div :class="['card-container', { main: post.mainPost }]">
-        <div class="image-container">
-            <img class="image" :src="post.imageAddress">
+    <div :class="['card-container', { mainCardCont: post.mainPost }]">
+        <div :class="['image-container', { mainImageCont: post.mainPost }]">
+            <img :class="['image', { mainImage: !post.mainPost }]" :src="post.imageAddress">
         </div>
-        <div class="text-container">
+        <div :class="['text-container', { mainTextCont: post.mainPost }]">
             <p>{{ post.title }}</p>
         </div>
     </div>
@@ -18,25 +18,41 @@ defineProps({
 <style scoped>
 .card-container {
     display: flex;
-    padding: 1vh 0;
     border-bottom: 2px solid var(--primary-black);
+    height: 13vh;
 }
-.main {
+.mainCardCont {
     flex-direction: column;
+    height: 40vh;
 }
 
 .image {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    border-radius: 0;
+}
+.mainImage {
+    border-radius: 7px;
 }
 
 .text-container {
-    background-color: lightblue;
+    height: 86%;
+    width: 56%;
+    padding: 2%;
+}
+.mainTextCont {
+    height: 35%;
+    width: 96%;
 }
 
 .image-container {
+    width: 40%;
+    padding: 2%;
+}
+.mainImageCont {
     width: 100%;
-    height: 100px;
+    height: 65%;
+    padding: 0;
 }
 </style>
