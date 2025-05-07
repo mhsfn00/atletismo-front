@@ -10,12 +10,40 @@ defineProps({
             <img :class="['image', { mainImage: !post.mainPost }]" :src="post.imageAddress">
         </div>
         <div :class="['text-container', { mainTextCont: post.mainPost }]">
-            <p>{{ post.title }}</p>
+            <p :class="['title', {mainTitle: post.mainPost }]">{{ post.title }}</p>
+            <p :class="['text-piece', {mainTextPiece: post.mainPost}]">Um pouco do texto</p>
+            <div class="author-date">
+                <p>Autor / Outra coisa</p>
+                <p>Monday, May, 16</p>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.author-date {
+    font-size: 1.2vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-piece {
+    font-size: 1.3vh;
+    height: 60%;
+}
+.mainTextPiece {
+    font-size: 1.5vh;
+
+}
+
+.title {
+    font-size: 1.7vh;
+    font-weight: bold;
+}
+.mainTitle {
+    font-size: 2.2vh;
+}
+
 .card-container {
     display: flex;
     border-bottom: 2px solid var(--primary-black);
@@ -40,6 +68,9 @@ defineProps({
     height: 86%;
     width: 56%;
     padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .mainTextCont {
     height: 35%;
