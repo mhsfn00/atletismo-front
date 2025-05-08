@@ -48,6 +48,7 @@ defineProps({
     display: flex;
     border-bottom: 2px solid var(--primary-black);
     height: 13vh;
+    background-color: var(--primary-white);
 }
 .mainCardCont {
     flex-direction: column;
