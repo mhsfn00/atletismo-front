@@ -4,7 +4,7 @@ import PostCard from '../components/PostCard.vue';
 
 <template>
     <div class="page-container">
-        <div class="main-post">
+        <div class="main-content">
             <PostCard 
                 :post="{
                     'mainPost': true,
@@ -13,7 +13,7 @@ import PostCard from '../components/PostCard.vue';
                 }" 
             />
         </div>
-        <div class="secondary-posts">
+        <div class="secondary-content">
             <PostCard 
                 :post="{
                     'mainPost': false,
@@ -75,7 +75,7 @@ import PostCard from '../components/PostCard.vue';
 </template>
 
 <style scoped>
-.secondary-posts {
+.secondary-content {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -83,7 +83,7 @@ import PostCard from '../components/PostCard.vue';
     overflow: auto;
 }
 
-.main-post {
+.main-content {
     display: flex;
     flex-direction: column;
     position: fixed;
